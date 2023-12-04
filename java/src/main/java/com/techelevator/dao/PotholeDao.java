@@ -1,9 +1,19 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Pothole;
+import org.springframework.context.annotation.Bean;
+
+import java.util.List;
+
 public interface PotholeDao {
 
-    PotholeDao createNewPothole(int userId, double latitude, double longitude,
-                                int severity, String status);
+        Pothole createNewPothole(int userId, double latitude, double longitude, int severity, String status);
 
-    PotholeDao createNewPothole();
+        List<Pothole> getAllPotholes();
+
+
+
+
+
+
 }

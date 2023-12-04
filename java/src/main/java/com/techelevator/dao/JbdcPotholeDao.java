@@ -1,53 +1,79 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Pothole;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
+import java.security.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
 @Component
 public class JbdcPotholeDao implements PotholeDao {
 
-    private final JdbcTemplate jbdcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
-    public JbdcPotholeDao(JdbcTemplate jbdcTemplate) {
-        this.jbdcTemplate = jbdcTemplate;
+    @Autowired
+    public JbdcPotholeDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
-
     @Override
     public Pothole createNewPothole(int userId, double latitude, double longitude, int severity, String status) {
-        Pothole newPothole = null;
-        String insertPotholeSql = "INSERT INTO public.potholes(\n" +
-                "\tpotholeid, userid, latitude, longitude, severity, status, reportedat)\n" +
-                "\tVALUES (?, ?, ?, ?, ?, ?, ?);";
-        jbdcTemplate.update();
-        return null;
+        String insertPotholeSql = "INSERT INTO public.potholes(userid, latitude, longitude, severity, status, reportedat) " +
+                "VALUES (?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
+        Pothole newPothole = new Pothole();
+        newPothole.setUserId(userId);
+        newPothole.setLatitude(latitude);
+        newPothole.setLongitude(longitude);
+        newPothole.setSeverity(severity);
+        newPothole.setStatus(status);
+        newPothole.setReportedAt(new Date());
+        jdbcTemplate.update(insertPotholeSql, newPothole.getUserId(), newPothole.getLatitude(), newPothole.getLongitude(), newPothole.getSeverity(), newPothole.getStatus());
+        return newPothole;
     }
 
     @Override
-    public Pothole createNewPothole() {
-        return null;
+    public List<Pothole> getAllPotholes() {
+        List<Pothole> potholes = new ArrayList<>();
+
+        String sql = "SELECT potholeid, userid, latitude, longitude, severity, status, reportedat FROM potholes";
+
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while(results.next()){
+                Pothole pothole = mapRowToPotholes(results);
+                potholes.add(pothole);
+            }
+        }catch(CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return potholes;
     }
 
-    //@Override
-//    public User createUser(RegisterUserDto user) {
-//        User newUser = null;
-//        String insertUserSql = "INSERT INTO users (username, password_hash, role) values (?, ?, ?) RETURNING user_id";
-//        String password_hash = new BCryptPasswordEncoder().encode(user.getPassword());
-//        String ssRole = user.getRole().toUpperCase().startsWith("ROLE_") ? user.getRole().toUpperCase() : "ROLE_" + user.getRole().toUpperCase();
-//        try {
-//            int newUserId = jdbcTemplate.queryForObject(insertUserSql, int.class, user.getUsername(), password_hash, ssRole);
-//            newUser = getUserById(newUserId);
-//        } catch (CannotGetJdbcConnectionException e) {
-//            throw new DaoException("Unable to connect to server or database", e);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DaoException("Data integrity violation", e);
-//        }
-//        return newUser;
-//    }
 
     private Pothole mapRowToPotholes(SqlRowSet rowSet) {
-        Pothole
+        Pothole pothole = new Pothole();
+
+        pothole.setPotholeId(rowSet.getInt("potholeid"));
+        pothole.setUserId(rowSet.getInt("userid"));
+        pothole.setLatitude(rowSet.getDouble("latitude"));
+        pothole.setLongitude(rowSet.getDouble("longitude"));
+        pothole.setSeverity(rowSet.getInt("severity"));
+        pothole.setStatus(rowSet.getString("status"));
+        pothole.setReportedAt(rowSet.getDate("reportedat"));
+
+        return pothole;
+
+
     }
+
+
 }

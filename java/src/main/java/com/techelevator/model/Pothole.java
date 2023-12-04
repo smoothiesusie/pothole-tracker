@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import com.techelevator.dao.PotholeDao;
+
 import java.util.Date;
 
 public class Pothole {
@@ -22,10 +24,10 @@ public class Pothole {
         this.reportedAt = reportedAt;
     }
 
-    public Pothole() {
+
+    public Pothole(){
 
     }
-
     public int getPotholeId() {
         return potholeId;
     }
@@ -81,4 +83,5 @@ public class Pothole {
     public void setReportedAt(Date reportedAt) {
         this.reportedAt = reportedAt;
     }
+
 }
