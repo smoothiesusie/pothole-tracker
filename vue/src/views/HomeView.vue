@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div class="buttons">
-      <button class="click">Add a New Pothole!</button>
-      <button class="click">Delete an existing Pothole!</button>
-      <button class="click">See all Potholes!</button>
+      <button class="click" @click="goToAddPothole" >Add a New Pothole!</button>
+      <button class="click" >Delete an existing Pothole!</button>
+      <button class="click" @click="goToAllPotholeView">See all Potholes!</button>
     </div>
     <div class="container">
       <h1>Home</h1>
@@ -17,6 +17,16 @@ Each reported pothole symbolizes a step towards smoother, safer journeys for eve
 <script>
  
 export default {
+
+  methods: {
+    goToAddPothole() {
+      this.$router.push('/potholes')
+    },
+
+    goToAllPotholeView(){
+      this.$router.push('/potholeList')
+    }
+  }
 
 };
 </script>

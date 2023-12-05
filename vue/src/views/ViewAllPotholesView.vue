@@ -1,13 +1,14 @@
 <template>
     <div>
-      <AddPothole />
+      <ViewPotholes />
     </div>
   </template>
   <script>
-   import AddPothole from '../components/AddPothole.vue'
+
+import ViewPotholes from '../components/ViewPotholes.vue';
   export default {
     components: {
-       AddPothole
-    }
+    ViewPotholes
+}
   };
   </script>

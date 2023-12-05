@@ -6,7 +6,8 @@ import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
-import PotholeView from '../views/PotholeView.vue';
+import PotholeView from '../views/PotholeView.vue';  //this will take you to addNewPothole.. Name will be changed soon
+import ViewAllPotholeView from '../views/ViewAllPotholesView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -53,7 +54,15 @@ const routes = [
     path: "/potholes",
     name: "potholes",
     component: PotholeView
+  },
+
+  {
+    path: "/potholeList",
+    name: "potholeList",
+    component: ViewAllPotholeView
   }
+
+
 ];
 
 // Create the router
