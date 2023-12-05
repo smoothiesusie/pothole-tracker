@@ -6,7 +6,7 @@
       <button class="click" @click="goToAllPotholeView">See all Potholes!</button>
     </div>
     <div class="container">
-      <h1>Home</h1>
+      <h1 class="home-title">Pothole Patrol</h1>
       <p>At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our streets safer and our communities more connected. By empowering individuals to report potholes swiftly and efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
 
 Each reported pothole symbolizes a step towards smoother, safer journeys for everyone. It's more than just an app; it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. Together, we're not just repairing the roads — we're building the foundation for a more responsive and caring world, one application at a time.</p>
@@ -102,5 +102,18 @@ export default {
   background-color:rgb(17, 109, 109);
   transform: scaleY(1.2);
 }
+
+.home-title {
+  padding-top: 100px;
+  font-size: 4em; 
+  color: #dae906; 
+  text-align: center; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  font-family: fantasy; 
+  margin-bottom: 20px; 
+  margin-top: -100px;
+  text-decoration: underline;
+}
+
 </style>
 
