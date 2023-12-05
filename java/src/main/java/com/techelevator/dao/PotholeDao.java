@@ -12,6 +12,8 @@ public interface PotholeDao {
         List<Pothole> getAllPotholes();
 
 
+        //todo create Pothole getPotholeByUserId(int userId)
+
 
 
 

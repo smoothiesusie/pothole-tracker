@@ -35,4 +35,6 @@ public class PotholeController {
     public List<Pothole> getAllPotholes(){
         return potholeDao.getAllPotholes();
     }
+
+    //todo -> create a controller for public Pothole deletePotholeByUserID(it will take a path variable which will be userID)
 }

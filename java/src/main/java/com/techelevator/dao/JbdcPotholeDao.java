@@ -4,6 +4,7 @@ import com.techelevator.exception.DaoException;
 import com.techelevator.model.Pothole;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jta.atomikos.AtomikosDependsOnBeanFactoryPostProcessor;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -57,6 +58,11 @@ public class JbdcPotholeDao implements PotholeDao {
         }
         return potholes;
     }
+
+
+    //todo -> Need to create another override method to delete potholes by userID.. Create method in potholeDao!
+
+
 
 
     private Pothole mapRowToPotholes(SqlRowSet rowSet) {
