@@ -1,6 +1,9 @@
 <template>
+  <div class="full-page-wrapper">
+    <h1 class="title">Pothole Patrol</h1>
     <div class="add-pothole">
       <h2>Add a New Pothole</h2>
+      <button class="generate-location" @click="getUserLocation">Auto-generate location</button>
       <form @submit.prevent="submitPothole">
         <div>
           <label for="latitude">Latitude:</label>
@@ -22,9 +25,11 @@
             <option value="fixed">Fixed</option>
           </select>
         </div>
-        <button type="submit">Add Pothole</button>
+        
       </form>
+      <button type="submit" class="pothole-button">Add Pothole</button>
     </div>
+  </div>
   </template>
   <script>
   export default {
@@ -46,31 +51,134 @@
       },
       resetForm() {
         this.pothole = { latitude: null, longitude: null, severity: 1, status: 'reported' };
+      },
+
+      getUserLocation() {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+              this.pothole.latitude = position.coords.latitude,
+              this.pothole.longitude = position.coords.longitude
+            },
+          
+          (error) => {
+            console.error("Error getting location: ", error);
+          },
+          {
+            enableHighAccuracy: true // Optional, for more accurate results
+          }
+        );
+      } else {
+        console.log("Geolocation is not supported by this browser.");
       }
     }
-  };
+  }
+};
   </script>
 
-  <style scoped>
+  <!-- <style scoped>
 
-  .add-pothole {
+  /* .add-pothole {
+    margin-top: 200px;
     display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 30px;
+  background: rgba(34, 2, 2, 0.247);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.705);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
+  width: 400px;
+  height: 400px;
+  margin: auto;
+  text-align: center;
+  font-family: monospace;
+}
+
+  
+  
+  
+ 
+  .full-page-wrapper {
+    background-image: url('https://images.unsplash.com/photo-1539651044670-315229da9d2f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-position: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+  } */ -->
+
+
+  <style scoped>
+.add-pothole {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
+  gap: 20px; 
+  padding: 30px;
+  background: rgba(34, 2, 2, 0.247);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.705);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
+  width: 400px;
+  height: auto; 
+  margin: auto;
+  text-align: center;
+  font-family: monospace;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+
+input {
+  padding: 10px; 
+  margin-bottom: 10px; 
+  width: 100%; 
+  box-sizing: border-box; 
+}
+
+.full-page-wrapper {
   background-image: url('https://images.unsplash.com/photo-1539651044670-315229da9d2f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
-  background-position: center;
   background-repeat: no-repeat;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  color: white;
+  height: 100vh;
+  position: relative; 
+}
+
+.title {
+  margin-top: -0.5px;
+  color: yellow;
+  font-family: fantasy;
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  padding-top: 50px;
+  text-decoration: underline;
+}
+
+.pothole-button {
+  height: 23px;
   border: 1px solid black;
-  color: rgb(208, 243, 8);
-  font-size: 2rem;
+  font-family: fantasy;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px 5px 5px 5px;
+  background-color: rgb(109, 201, 201);
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+
+}
+
+.pothole-button:hover {
+  transform: scaleY(1.2);
+  border: 2px solid white;
+}
+</style>
+
   
-  
-  }
- 
-  
-  </style>

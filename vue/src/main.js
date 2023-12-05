@@ -2,7 +2,9 @@ import { createApp } from 'vue'
 import CapstoneApp from './App.vue'
 import { createStore } from './store'
 import router from './router'
-import axios from 'axios'
+import axios from 'axios' 
+import VueGeolocation from 'vue-browser-geolocation'
+import * as VueGoogleMaps from 'vue3-google-map'
 
 /* sets the base url for server API communication with axios */
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
@@ -16,10 +18,19 @@ axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API;
 let currentToken = localStorage.getItem('token');
 let currentUser = JSON.parse(localStorage.getItem('user'));
 
+
 if (currentToken) {
   // Set token axios requests
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
+// app.use(VueGeolocation);
+
+// app.use(VueGoogleMaps, {
+//   load: {
+//     key: 'AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M', // Replace with your actual API key
+//     libraries: 'places' // Necessary if you need to use Places API
+//   }
+// });
 
 // Create the Vuex store passing in the stored credentials
 const store = createStore(currentToken, currentUser);
