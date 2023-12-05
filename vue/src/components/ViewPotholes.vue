@@ -17,6 +17,8 @@
   </template>
   
   <script>
+import PotholeService from '../services/PotholeService';
+
   export default {
     name: 'ViewPotholes',
     data() {
@@ -24,13 +26,20 @@
         potholes: [] 
       };
     },
+    
     created() {
       this.fetchPotholes();
+
     },
     methods: {
       fetchPotholes() {
         console.log('Fetching potholes...');
         // Example static data
+        PotholeService.getPotholeList().then(response=>{
+          this.potholes =  response.data
+
+
+        })
         this.potholes = [
           { latitude: 38.3460, longitude: -0.4908, severity: 3, status: 'reported' },
          
