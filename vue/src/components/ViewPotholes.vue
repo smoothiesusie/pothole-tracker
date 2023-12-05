@@ -29,7 +29,6 @@
     },
     methods: {
       fetchPotholes() {
-      
         console.log('Fetching potholes...');
         // Example static data
         this.potholes = [
