@@ -24,7 +24,6 @@ public class Pothole {
         this.reportedAt = reportedAt;
     }
 
-
     public Pothole(){
 
     }

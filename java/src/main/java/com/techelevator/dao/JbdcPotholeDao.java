@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Component
 public class JbdcPotholeDao implements PotholeDao {
 
@@ -46,7 +45,6 @@ public class JbdcPotholeDao implements PotholeDao {
 
         String sql = "SELECT potholeid, userid, latitude, longitude, severity, status, reportedat FROM potholes";
 
-
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
             while(results.next()){
@@ -59,11 +57,12 @@ public class JbdcPotholeDao implements PotholeDao {
         return potholes;
     }
 
-
     //todo -> Need to create another override method to delete potholes by userID.. Create method in potholeDao!
-
-
-
+    @Override
+    public void deletePotholeByUserID(int userId) {
+        String deleteSql = "DELETE FROM potholes WHERE userid = ?";
+        jdbcTemplate.update(deleteSql, userId);
+    }
 
     private Pothole mapRowToPotholes(SqlRowSet rowSet) {
         Pothole pothole = new Pothole();
@@ -77,9 +76,5 @@ public class JbdcPotholeDao implements PotholeDao {
         pothole.setReportedAt(rowSet.getDate("reportedat"));
 
         return pothole;
-
-
     }
-
-
 }
