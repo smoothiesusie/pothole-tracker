@@ -30,7 +30,6 @@ public class PotholeController {
         );
     }
 
-
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(path = "/potholes", method = RequestMethod.GET)
     public List<Pothole> getAllPotholes(){
@@ -38,4 +37,9 @@ public class PotholeController {
     }
 
     //todo -> create a controller for public Pothole deletePotholeByUserID(it will take a path variable which will be userID)
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/potholes/user/{userId}")
+    public void deletePotholeByUserID(@PathVariable int userId) {
+        potholeDao.deletePotholeByUserID(userId);
+    }
 }
