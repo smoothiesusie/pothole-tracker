@@ -29,6 +29,7 @@ public class PotholeController {
                 pothole.getStatus()
         );
     }
+    
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(path = "/potholes", method = RequestMethod.GET)
