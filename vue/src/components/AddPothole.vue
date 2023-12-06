@@ -62,7 +62,6 @@
 
   PotholeService.addNewPothole(this.pothole).then(response => {
     this.pothole = response.data;
-    // Emit an event with the pothole's location
     this.$emit('potholeAdded', {
       latitude: this.pothole.latitude,
       longitude: this.pothole.longitude
