@@ -30,12 +30,14 @@
   
   <script>
 import PotholeService from '../services/PotholeService';
+import Maps from './Maps.vue'
 
 
 
   export default {
 
    components: {
+    Maps
     
    },
 

@@ -47,24 +47,23 @@
  
  
  
- <template>
-
-<!-- <GmapMap 
-   :center="{lat:10, lng:10}"
-   :zoom="7"
-   style="width:640px; height360px;"
-   ></GmapMap> -->
+  <template>
+    <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center" :zoom="15">
+      <Marker :options="{ position: center }" />
+    </GoogleMap>
   </template>
+  
+  <script>
+  import { defineComponent } from "vue";
+  import { GoogleMap, Marker } from "vue3-google-map";
+  
+  export default defineComponent({
+    components: { GoogleMap, Marker },
+    setup() {
+      const center = { lat: 40.689247, lng: -74.044502 };
+  
+      return { center };
+    },
+  });
+  </script>
 
-
-<script>
-export default {
-
-
-}
-</script>
-
-<style>
-
-
-</style>
