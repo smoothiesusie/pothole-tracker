@@ -1,6 +1,6 @@
 <template>
   <div class="full-page-wrapper">
-    <h1 class="title">Pothole Patrol</h1>
+    <!-- <h1 class="title">Pothole Patrol</h1> -->
     <div class="add-pothole">
       <h2>Add a New Pothole</h2>
       <button class="generate-location" @click="getUserLocation">Auto-generate location</button>
@@ -28,13 +28,23 @@
         
       </form>
       <button type="submit" class="pothole-button" @click="submitPothole">Add Pothole</button>
+      
+      
     </div>
+    
+    
   </div>
+  <div class="map-container"><Maps/></div>
   </template>
   <script>
 
   import PotholeService from '../services/PotholeService';
+  import Maps from './Maps.vue';
   export default {
+
+    components : {
+      Maps
+    },
     name: 'AddPothole',
     data() {
       return {
@@ -48,16 +58,19 @@
     },
     methods: {
       submitPothole() {
-        console.log('Adding pothole:', this.pothole);
+  console.log('Adding pothole:', this.pothole);
 
-        PotholeService.addNewPothole(this.pothole).then(response => {
-          this.pothole = response.data
-        })
-        this.resetForm();
-      },
-      resetForm() {
-        this.pothole = { latitude: null, longitude: null, severity: 1, status: 'reported' };
-      },
+  PotholeService.addNewPothole(this.pothole).then(response => {
+    this.pothole = response.data;
+    // Emit an event with the pothole's location
+    this.$emit('potholeAdded', {
+      latitude: this.pothole.latitude,
+      longitude: this.pothole.longitude
+    });
+  });
+  this.resetForm();
+},
+
 
       getUserLocation() {
       if ('geolocation' in navigator) {
@@ -121,30 +134,41 @@
 
 
   <style scoped>
-.add-pothole {
+
+  .map-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: -565px;
+    
+  }
+  .add-pothole {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px; 
-  padding: 30px;
-  background: rgba(34, 2, 2, 0.247);
+  padding: 20px;
+  background: rgba(34, 2, 2, 0.158);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.705);
+  border: 1px solid rgba(253, 243, 243, 0.705);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
-  width: 400px;
-  height: auto; 
-  margin: auto;
+  width: 1000px;
+  height: 300px; 
+  margin: auto; 
   text-align: center;
   font-family: monospace;
-  position: absolute;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
+  padding-bottom: 50px;
+  padding-top: -30px;
+  margin-top: -0.5px;
+  border-top: -1px;
+  padding: -5px;
+  position: relative;
+  top: 7px;
 }
-
 input {
   padding: 10px; 
   margin-bottom: 10px; 

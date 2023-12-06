@@ -61,7 +61,7 @@ export default {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.705);
+  border: 1px solid rgba(253, 243, 243, 0.705);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
   width: 1100px;
 }
@@ -113,6 +113,7 @@ export default {
   margin-bottom: 20px; 
   margin-top: -100px;
   text-decoration: underline;
+  
 }
 
 </style>

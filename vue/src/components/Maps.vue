@@ -48,9 +48,11 @@
  
  
   <template>
+    <div class="map-container">
     <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center" :zoom="15">
       <Marker :options="{ position: center }" />
     </GoogleMap>
+</div>
   </template>
   
   <script>
@@ -64,6 +66,22 @@
   
       return { center };
     },
+
+    methods: {
+
+}
+
   });
   </script>
+
+<style scoped>
+.map-container {
+  width: 80%; 
+  height: 500px;  
+  margin: auto;  
+  padding-bottom: 20px;  
+  
+}
+</style>
+
 
