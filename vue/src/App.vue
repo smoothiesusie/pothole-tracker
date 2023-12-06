@@ -8,8 +8,11 @@
       <div class="nav-links">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <div class="user-info">Welcome to Pothole Patrol, {{ $store.state.user.username }}</div>
+
       </div>
     </div>
+    <!-- <div>{{ $store.state.user }}</div> -->
     <router-view />
   </div>
 </template>
@@ -52,6 +55,12 @@
 .nav-links {
   display: flex;
   gap: 10px; 
+}
+
+.user-info {
+  color: white;
+  padding-right: 5px;
+  border: 1px solid white;
 }
 
 </style>

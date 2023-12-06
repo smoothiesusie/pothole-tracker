@@ -1,11 +1,14 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.PotholeDao;
+import com.techelevator.dao.UserDao;
 import com.techelevator.model.Pothole;
+import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -14,16 +17,19 @@ public class PotholeController {
 
     private Pothole pothole;
     private PotholeDao potholeDao;
-    public PotholeController(PotholeDao potholeDao){
+    private UserDao userDao;
+    public PotholeController(PotholeDao potholeDao, UserDao userDao){
         this.potholeDao = potholeDao;
+        this.userDao = userDao;
 
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/addPothole", method = RequestMethod.POST)
-    public Pothole createPothole(@Valid @RequestBody Pothole pothole){
+    public Pothole createPothole(@Valid @RequestBody Pothole pothole, Principal principal){
+        User user = userDao.getUserByUsername(principal.getName());
         return potholeDao.createNewPothole(
-                pothole.getUserId(),
+                user.getId(),
                 pothole.getLatitude(),
                 pothole.getLongitude(),
                 pothole.getSeverity(),

@@ -49,6 +49,7 @@
     data() {
       return {
         pothole: {
+          userid: null,
           latitude: null,
           longitude: null,
           severity: 1,
@@ -67,7 +68,7 @@
       longitude: this.pothole.longitude
     });
   });
-  this.resetForm();
+  // this.resetForm();
 },
 
 

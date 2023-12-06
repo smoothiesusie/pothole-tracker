@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       user: {
+        userRole: this.role,
         username: "",
         password: ""
       },
