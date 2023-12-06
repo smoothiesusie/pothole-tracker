@@ -1,5 +1,6 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.techelevator.dao.PotholeDao;
 
 import java.util.Date;
@@ -7,11 +8,18 @@ import java.util.Date;
 public class Pothole {
 
     private int potholeId;
+
+
     private int userId;
+
     private double latitude;
+
     private double longitude;
+
     private int severity;
+
     private String status;
+
     private Date reportedAt;
 
     public Pothole(int potholeId, int userId, double latitude, double longitude, int severity, String status, Date reportedAt) {

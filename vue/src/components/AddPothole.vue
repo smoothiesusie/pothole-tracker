@@ -27,11 +27,13 @@
         </div>
         
       </form>
-      <button type="submit" class="pothole-button">Add Pothole</button>
+      <button type="submit" class="pothole-button" @click="submitPothole">Add Pothole</button>
     </div>
   </div>
   </template>
   <script>
+
+  import PotholeService from '../services/PotholeService';
   export default {
     name: 'AddPothole',
     data() {
@@ -47,6 +49,10 @@
     methods: {
       submitPothole() {
         console.log('Adding pothole:', this.pothole);
+
+        PotholeService.addNewPothole(this.pothole).then(response => {
+          this.pothole = response.data
+        })
         this.resetForm();
       },
       resetForm() {
@@ -71,7 +77,9 @@
       } else {
         console.log("Geolocation is not supported by this browser.");
       }
-    }
+    },
+
+
   }
 };
   </script>
