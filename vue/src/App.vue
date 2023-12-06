@@ -55,12 +55,18 @@
 .nav-links {
   display: flex;
   gap: 10px; 
+  padding-right: 5px;
 }
 
 .user-info {
   color: white;
-  padding-right: 5px;
+  
   border: 1px solid white;
+ 
+  margin-right: auto;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

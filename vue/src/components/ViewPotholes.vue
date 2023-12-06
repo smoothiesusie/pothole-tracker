@@ -15,6 +15,8 @@
           <div>Longitude: {{ pothole.longitude }}</div>
           <div>Severity: {{ pothole.severity }}</div>
           <div>Status: {{ pothole.status }}</div>
+          <div>Date Reported: {{ pothole.reportedAt }}</div>
+          <div>Reported By: {{ $store.state.user.username }}</div>
           <button class="update">Update Status</button>
         </div>
          

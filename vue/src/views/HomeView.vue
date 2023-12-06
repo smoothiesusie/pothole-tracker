@@ -57,7 +57,7 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  background: rgba(34, 2, 2, 0.247);
+  background: rgba(122, 118, 118, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
@@ -112,7 +112,7 @@ export default {
   font-family: fantasy; 
   margin-bottom: 20px; 
   margin-top: -100px;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   
 }
 
