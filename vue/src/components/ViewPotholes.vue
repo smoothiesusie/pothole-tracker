@@ -2,6 +2,9 @@
     <div class="full-background">
     <h2 class="title">View Potholes</h2>
     <div class="view-potholes">
+      <div v-if="isLoading" class="loading">
+                Loading potholes...
+            </div>
       <div v-if="potholes.length === 0">
         No potholes reported yet.
       </div>
@@ -39,7 +42,8 @@ import PotholeService from '../services/PotholeService';
     name: 'ViewPotholes',
     data() {
       return {
-        potholes: [] 
+        potholes: [],
+        isLoading: true,
       };
     },
     
@@ -53,13 +57,11 @@ import PotholeService from '../services/PotholeService';
         
         PotholeService.getPotholeList().then(response=>{
           this.potholes =  response.data
+          this.isLoading = false;
 
 
         })
-        this.potholes = [
-          { latitude: 38.3460, longitude: -0.4908, severity: 3, status: 'reported' },
-         
-        ];
+        
       }
     }
   };
@@ -165,6 +167,14 @@ import PotholeService from '../services/PotholeService';
   color: rgb(208, 243, 8);
   text-decoration: underline;
  
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  font-size: 6rem;
+  font-family: monospace;
+  color: rgb(160, 216, 216);
 }
   </style>
   
