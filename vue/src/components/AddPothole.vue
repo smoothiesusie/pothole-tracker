@@ -140,7 +140,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: -565px;
+    margin-top: -285px;
     
   }
   .add-pothole {
@@ -156,7 +156,7 @@
   border-radius: 10px;
   border: 1px solid rgba(253, 243, 243, 0.705);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
-  width: 1000px;
+  width: 1470px;
   height: 300px; 
   margin: auto; 
   text-align: center;
