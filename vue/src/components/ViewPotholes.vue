@@ -16,9 +16,10 @@
           <div>Severity: {{ pothole.severity }}</div>
           <div>Status: {{ pothole.status }}</div>
           <div>Date Reported: {{ pothole.reportedAt }}</div>
-          <div>Reported By: {{ $store.state.user.username }}</div>
+          <div>Reported By: {{ pothole.username  }}</div>
           <button class="update">Update Status</button>
         </div>
+        
          
       </div>
       </ul>
@@ -33,6 +34,7 @@
   <script>
 import PotholeService from '../services/PotholeService';
 import Maps from './Maps.vue'
+import UserServices from '../services/UserServices'
 
 
 
@@ -47,12 +49,14 @@ import Maps from './Maps.vue'
     data() {
       return {
         potholes: [],
+        users: [],
         isLoading: true,
       };
     },
     
     created() {
       this.fetchPotholes();
+      
 
     },
     methods: {
@@ -66,7 +70,7 @@ import Maps from './Maps.vue'
 
         })
         
-      }
+      },
     }
   };
   </script>

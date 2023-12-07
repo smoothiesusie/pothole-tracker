@@ -1,22 +1,46 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.PotholeDao;
 import com.techelevator.dao.UserDao;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.techelevator.dao.UsersPotholeDao;
+import com.techelevator.model.Pothole;
+import com.techelevator.model.User;
+import com.techelevator.model.UsersPotholeDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @CrossOrigin
 public class UserController {
+    private UsersPotholeDao usersPotholeDao;
 
-    private UserDao userDao;
+    public UserController(UsersPotholeDao usersPotholeDao) {
+        this.usersPotholeDao = usersPotholeDao;
 
-//    @RequestMapping(path = "/currentUser", method = RequestMethod.GET)
-//    public int getCurrentUser(Principal currentUser){
-//
-//    }
+    }
+
+
+    @RequestMapping(path = "/users/{potholeId}", method = RequestMethod.GET)
+    public ResponseEntity getUserByPotholeId(@PathVariable int potholeId) {
+        UsersPotholeDto user = usersPotholeDao.getUserByPotholeId(potholeId);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(path = "/UsersPotholes", method = RequestMethod.GET)
+    public List<UsersPotholeDto> getAllPotholes(){
+        return usersPotholeDao.getAllUsersPotholeList();
+    }
+
 
 }

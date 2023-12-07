@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
 
     getPotholeList(pothole) {
-        return axios.get('/potholes', pothole)
+        return axios.get('/UsersPotholes', pothole)
     },
 
     addNewPothole(pothole) {
