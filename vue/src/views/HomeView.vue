@@ -1,21 +1,27 @@
 <template>
   <div class="home">
     <div class="buttons">
-      <button class="click" @click="goToAddPothole" >Add a New Pothole!</button>
+      <button class="click" @click="goToAddPothole">Add a New Pothole!</button>
       <!-- <button class="click" >Delete an existing Pothole!</button> -->
       <button class="click" @click="goToAllPotholeView">See all Potholes!</button>
     </div>
     <div class="container">
       <h1 class="home-title">Pothole Patrol</h1>
-      <p>At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our streets safer and our communities more connected. By empowering individuals to report potholes swiftly and efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
+      <p>At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our
+        streets safer and our communities more connected. By empowering individuals to report potholes swiftly and
+        efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
 
-Each reported pothole symbolizes a step towards smoother, safer journeys for everyone. It's more than just an app; it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. Together, we're not just repairing the roads — we're building the foundation for a more responsive and caring world, one application at a time.</p>
+        Each reported pothole symbolizes a step towards smoother, safer journeys for everyone. It's more than just an app;
+        it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. Together,
+        we're not just repairing the roads — we're building the foundation for a more responsive and caring world, one
+        application at a time.</p>
     </div>
   </div>
 </template>
 
 <script>
- 
+import PotholeService from '../services/PotholeService';
+
 export default {
 
   methods: {
@@ -23,10 +29,31 @@ export default {
       this.$router.push('/potholes')
     },
 
-    goToAllPotholeView(){
+    goToAllPotholeView() {
       this.$router.push('/potholeList')
+    },
+    fetchPotholes() {
+      console.log('Fetching potholes...');
+
+      PotholeService.getPotholeList().then(response => {
+        this.$store.state.potholes = response.data
+
+      })
+
+    },
+    // createMarkers(){
+    //   this.$store.state.potholes.forEach(pothole=>{
+    //       let marker = {center: {lat: pothole.latitude, lng: pothole.longitude}}
+    //       this.$store.state.markers.push(marker)
+    //     })
+    // },
+   
+  
+  },
+  created(){
+      this.fetchPotholes();
+      // this.createMarkers()
     }
-  }
 
 };
 </script>
@@ -77,8 +104,8 @@ export default {
   text-align: center;
   border-top: 20px;
   margin-bottom: -30px;
-  
-  
+
+
 }
 
 .click {
@@ -89,32 +116,30 @@ export default {
   width: 300px;
   height: 45px;
   border-radius: 15px 15px 15px 15px;
-  box-shadow: 2px 2px 2px black ;
+  box-shadow: 2px 2px 2px black;
   text-align: center;
-  font-family:monospace;
+  font-family: monospace;
   font-size: large;
-  background-color:rgb(13, 173, 173);
+  background-color: rgb(13, 173, 173);
   color: whitesmoke;
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .click:hover {
-  background-color:rgb(17, 109, 109);
+  background-color: rgb(17, 109, 109);
   transform: scaleY(1.2);
 }
 
 .home-title {
   padding-top: 50px;
-  font-size: 2em; 
-  color: #dae906; 
-  text-align: center; 
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
-  font-family: fantasy; 
-  margin-bottom: 20px; 
+  font-size: 2em;
+  color: #dae906;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: fantasy;
+  margin-bottom: 20px;
   margin-top: -100px;
   /* text-decoration: underline; */
-  
-}
 
-</style>
+}</style>
 

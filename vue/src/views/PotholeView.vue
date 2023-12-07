@@ -31,7 +31,7 @@
   </template>
   
   <script>
-  import AddPothole from '../components/Addpothole.vue';
+  import AddPothole from '../components/AddPothole.vue';
   // import Maps from '../components/Maps.vue';
   
   export default {

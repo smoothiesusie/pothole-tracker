@@ -1,89 +1,98 @@
 <template>
-    <div class="full-background">
+  <div class="full-background">
     <h2 class="title">View Potholes</h2>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">
-                Loading potholes...
-            </div>
+        Loading potholes...
+      </div>
       <div v-if="potholes.length === 0">
         No potholes reported yet.
       </div>
       <ul v-else>
         <div v-for="pothole in potholes" :key="pothole.id">
           <div class="detail-container">
-          <div>Latitude: {{ pothole.latitude }}</div>
-          <div>Longitude: {{ pothole.longitude }}</div>
-          <div>Severity: {{ pothole.severity }}</div>
-          <div>Status: {{ pothole.status }}</div>
-          <div>Date Reported: {{ pothole.reportedAt }}</div>
-          <div>Reported By: {{ pothole.username  }}</div>
-          <button class="update" v-if="isUserAdmin">Update Status</button>
-          <v-else></v-else>
+            <div>Latitude: {{ pothole.latitude }}</div>
+            <div>Longitude: {{ pothole.longitude }}</div>
+            <div>Severity: {{ pothole.severity }}</div>
+            <div>Status: {{ pothole.status }}</div>
+            <div>Date Reported: {{ pothole.reportedAt }}</div>
+            <div>Reported By: {{ pothole.username }}</div>
+            <button class="update" v-if="isUserAdmin">Update Status</button>
+
+          </div>
+
+
         </div>
-        
-         
-      </div>
       </ul>
 
     </div>
 
-    <Maps />
+    <Maps v-bind:markers="markers" />
 
   </div>
-  </template>
+</template>
   
-  <script>
+<script>
 import PotholeService from '../services/PotholeService';
-import Maps from './Maps.vue'
+import Maps from './Maps.vue';
 // import UserServices from '../services/UserServices'
 
 
 
-  export default {
+export default {
 
-   components: {
+  components: {
     Maps
-    
-   },
 
-    name: 'ViewPotholes',
-    data() {
-      return {
-        potholes: [],
-        users: [],
-        isLoading: true,
-      };
-    },
-    
-    created() {
-      this.fetchPotholes();
-      
+  },
 
-    },
-    methods: {
-      fetchPotholes() {
-        console.log('Fetching potholes...');
-        
-        PotholeService.getPotholeList().then(response=>{
-          this.potholes =  response.data
-          this.isLoading = false;
+  name: 'ViewPotholes',
+  data() {
+    return {
+      potholes: [],
+      users: [],
+      isLoading: true,
+      markers: []
+    };
+  },
+
+  created() {
+    this.fetchPotholes();
+
+    this.$store.state.potholes.forEach(pothole => {
+      console.log('here')
+      let marker = { center: { lat: pothole.latitude, lng: pothole.longitude } }
+      this.$store.state.markers.push(marker)
+    })
+    this.isLoading = false;
 
 
-        })
-        
-      },
-    },
-    computed: {
-        isUserAdmin() {
-            const currentUser = this.$store.state.user;
-            return currentUser && currentUser.authorities.some(auth => auth.name === 'ROLE_ADMIN');
-        }
-    },
-  };
-  </script>
+  },
+  methods: {
+    fetchPotholes() {
+      console.log('Fetching potholes...');
+
+      PotholeService.getPotholeList().then(response => {
+        this.potholes = response.data
+        this.$store.state.potholes = response.data
+        this.isLoading = false;
+
+
+      })
+
+    }
+  },
+  computed: {
+    isUserAdmin() {
+      const currentUser = this.$store.state.user;
+      return currentUser && currentUser.authorities.some(auth => auth.name === 'ROLE_ADMIN');
+    }
+  },
+}
+</script>
   
-  <style scoped>
-  /* .view-potholes { 
+<style scoped>
+/* .view-potholes { 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,18 +142,19 @@ import Maps from './Maps.vue'
   transform: scaleY(1.2);
   border: 2px solid white;
 }
-  .view-potholes ul { 
-    font-family: fantasy;
+
+.view-potholes ul {
+  font-family: fantasy;
   display: flex;
-  flex-direction: row; 
-  overflow-x: auto; 
-  white-space: nowrap; 
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
   padding: 10px;
 }
 
 .view-potholes {
-  
-  backdrop-filter: blur(2px); 
+
+  backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
 }
 
@@ -155,21 +165,21 @@ import Maps from './Maps.vue'
   flex-direction: column;
   width: 250px;
   height: 250px;
-  margin: 10px; 
-  justify-content: space-around; 
-  box-shadow: 2px 2px 5px grey; 
+  margin: 10px;
+  justify-content: space-around;
+  box-shadow: 2px 2px 5px grey;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px); 
-  border-radius: 10px; 
-  color: black; 
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  color: black;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
 
 .detail-container:hover {
-  transform: scale(1.05); 
-  box-shadow: 5px 5px 10px grey; 
+  transform: scale(1.05);
+  box-shadow: 5px 5px 10px grey;
 }
 
 .title {
@@ -178,10 +188,10 @@ import Maps from './Maps.vue'
   justify-content: center;
   font-family: fantasy;
   font-size: 4rem;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
   color: rgb(208, 243, 8);
   text-decoration: underline;
- 
+
 }
 
 .loading {
@@ -191,5 +201,5 @@ import Maps from './Maps.vue'
   font-family: monospace;
   color: rgb(160, 216, 216);
 }
-  </style>
+</style>
   

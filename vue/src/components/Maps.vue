@@ -47,38 +47,59 @@
  
  
  
-  <template>
-    <div class="map-container">
-      <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center" :zoom="15">
-        <Marker v-for="marker in markers" :key="marker.id" :options="{ position: marker.position }" />
-      </GoogleMap>
-    </div>
-  </template>
+<template>
+  <div class="map-container">
+    <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center"
+      :zoom="15">
+      <MarkerCluster>
+      <Marker v-for="marker in $store.state.markers" :position="marker.center" :key="marker.id"
+        :options="{ position: marker.center }" />
+      <!-- <Marker :options="{ position:test }" /> -->
+    </MarkerCluster>
+    </GoogleMap>
+  </div>
+</template>
   
-  <script>
-  import { defineComponent } from "vue";
-  import { GoogleMap, Marker } from "vue3-google-map";
-  
-  export default defineComponent({
-    components: { GoogleMap, Marker },
-    props: {
-      markers: Array,
-    },
-    setup() {
-      const center = { lat: 39.952583, lng: -75.165222 };
-  
-      return { center };
-    },
-  });
-  </script>
+<script>
+import { defineComponent } from "vue";
+import { GoogleMap, Marker, MarkerCluster} from "vue3-google-map";
+
+export default defineComponent({
+  components: { GoogleMap, Marker, MarkerCluster },
+  props: {
+    markers: Array,
+  },
+  computed: {
+    test() {
+      console.log(this.$store.state.potholes)
+      console.log(this.$store.state.markers[0])
+      let marker = { lat: parseInt(this.$store.state.markers[0].center.lat), lng: parseInt(this.$store.state.markers[0].center.lng) }
+      console.log(marker)
+      return marker;
+    }
+
+  },
+  methods: {
+    testCenter(marker) {
+      return marker.center;
+    }
+  },
+
+  setup() {
+    const center = { lat: 39.952583, lng: -75.165222 };
+
+    return { center };
+  },
+});
+</script>
 
 <style scoped>
 .map-container {
-  width: 80%; 
-  height: 500px;  
-  margin: auto;  
-  padding-bottom: 20px;  
-  
+  width: 80%;
+  height: 500px;
+  margin: auto;
+  padding-bottom: 20px;
+
 }
 
 .pothole-pin {

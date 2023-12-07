@@ -34,7 +34,7 @@
     
     
   </div>
-  <div class="map-container"><Maps/></div>
+  <div class="map-container" ><Maps v-bind:markers="markers"/></div>
   </template>
   <script>
 
@@ -54,7 +54,8 @@
           longitude: null,
           severity: 1,
           status: 'reported'
-        }
+        },
+        markers: []
       };
     },
     methods: {
@@ -97,7 +98,15 @@
         console.log("Geolocation is not supported by this browser.");
       }
     },
-
+    createMarkers(){
+      this.$store.state.potholes.forEach(pothole => {
+      let marker = { center: { lat: pothole.latitude, lng: pothole.longitude } }
+      this.$store.state.markers.push(marker)
+    })
+    },
+    created(){
+      this.createMarkers()
+    }
 
   }
 };
