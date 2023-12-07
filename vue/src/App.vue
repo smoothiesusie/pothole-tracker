@@ -12,7 +12,7 @@
 
       </div>
     </div>
-    <!-- <div>{{ $store.state.user }}</div> -->
+    <div>{{ $store.state.user }}</div>
     <router-view />
   </div>
 </template>

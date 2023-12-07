@@ -17,7 +17,8 @@
           <div>Status: {{ pothole.status }}</div>
           <div>Date Reported: {{ pothole.reportedAt }}</div>
           <div>Reported By: {{ pothole.username  }}</div>
-          <button class="update">Update Status</button>
+          <button class="update" v-if="isUserAdmin">Update Status</button>
+          <v-else></v-else>
         </div>
         
          
@@ -71,7 +72,13 @@ import Maps from './Maps.vue'
         })
         
       },
-    }
+    },
+    computed: {
+        isUserAdmin() {
+            const currentUser = this.$store.state.user;
+            return currentUser && currentUser.authorities.some(auth => auth.name === 'ROLE_ADMIN');
+        }
+    },
   };
   </script>
   
