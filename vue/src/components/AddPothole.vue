@@ -59,6 +59,12 @@
     },
     methods: {
       submitPothole() {
+  
+  if (this.pothole.latitude === 0 || this.pothole.longitude === 0) {
+    console.log("Please input valid coordinates (non-zero).");
+    return;
+  }
+
   console.log('Adding pothole:', this.pothole);
 
   PotholeService.addNewPothole(this.pothole).then(response => {

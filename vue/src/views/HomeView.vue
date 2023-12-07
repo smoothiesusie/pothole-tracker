@@ -2,7 +2,7 @@
   <div class="home">
     <div class="buttons">
       <button class="click" @click="goToAddPothole" >Add a New Pothole!</button>
-      <button class="click" >Delete an existing Pothole!</button>
+      <!-- <button class="click" >Delete an existing Pothole!</button> -->
       <button class="click" @click="goToAllPotholeView">See all Potholes!</button>
     </div>
     <div class="container">

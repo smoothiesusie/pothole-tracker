@@ -49,10 +49,10 @@
  
   <template>
     <div class="map-container">
-    <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center" :zoom="15">
-      <Marker :options="{ position: center }" />
-    </GoogleMap>
-</div>
+      <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center" :zoom="15">
+        <Marker v-for="marker in markers" :key="marker.id" :options="{ position: marker.position }" />
+      </GoogleMap>
+    </div>
   </template>
   
   <script>
@@ -61,16 +61,14 @@
   
   export default defineComponent({
     components: { GoogleMap, Marker },
+    props: {
+      markers: Array,
+    },
     setup() {
       const center = { lat: 39.952583, lng: -75.165222 };
   
       return { center };
     },
-
-    methods: {
-
-}
-
   });
   </script>
 
@@ -81,6 +79,10 @@
   margin: auto;  
   padding-bottom: 20px;  
   
+}
+
+.pothole-pin {
+  color: white;
 }
 </style>
 
