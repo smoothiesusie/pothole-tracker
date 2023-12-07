@@ -27,7 +27,7 @@
 
     </div>
 
-    <Maps v-bind:markers="markers" />
+    <Maps/>
 
   </div>
 </template>

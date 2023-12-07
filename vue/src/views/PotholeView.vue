@@ -25,19 +25,18 @@
 
   <template>
     <div>
-      <AddPothole @potholeAdded="handlePotholeAdded" />
-      <Maps :markers="markers" />
+      <AddPothole/>
+      
     </div>
   </template>
   
   <script>
   import AddPothole from '../components/AddPothole.vue';
-  // import Maps from '../components/Maps.vue';
+  
   
   export default {
     components: {
       AddPothole,
-      // Maps
     },
     data() {
       return {
@@ -46,6 +45,7 @@
     },
     methods: {
       handlePotholeAdded(pothole) {
+        // this.$store.state.potholes.push(this.pothole);
         const newMarker = {
           id: this.markers.length + 1,
           position: {

@@ -34,7 +34,7 @@
     
     
   </div>
-  <div class="map-container" ><Maps v-bind:markers="markers"/></div>
+  <div class="map-container" ><Maps/></div>
   </template>
   <script>
 
@@ -50,8 +50,8 @@
       return {
         pothole: {
           userid: null,
-          latitude: null,
-          longitude: null,
+          latitude: 0,
+          longitude: 0,
           severity: 1,
           status: 'reported'
         },
@@ -61,7 +61,7 @@
     methods: {
       submitPothole() {
   
-  if (this.pothole.latitude === 0 || this.pothole.longitude === 0) {
+  if (this.pothole.latitude === 0 || this.pothole.longitude === 0 ) {
     console.log("Please input valid coordinates (non-zero).");
     return;
   }
@@ -70,10 +70,14 @@
 
   PotholeService.addNewPothole(this.pothole).then(response => {
     this.pothole = response.data;
-    this.$emit('potholeAdded', {
-      latitude: this.pothole.latitude,
-      longitude: this.pothole.longitude
-    });
+    // this.$emit('potholeAdded', {
+    //   latitude: this.pothole.latitude,
+    //   longitude: this.pothole.longitude
+    // });
+    console.log(this.pothole)
+    this.$store.state.potholes.push(this.pothole)
+    this.$router.push("/")
+   
   });
   
 },

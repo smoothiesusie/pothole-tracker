@@ -49,13 +49,14 @@
  
 <template>
   <div class="map-container">
+
     <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center"
       :zoom="15">
-      <MarkerCluster>
-      <Marker v-for="marker in $store.state.markers" :position="marker.center" :key="marker.id"
-        :options="{ position: marker.center }" />
+      
+      <Marker v-for="marker in markers" :key="marker.id"
+      :options="{ position: { lat: marker.lat, lng: marker.lng }, visible: true }"/>
       <!-- <Marker :options="{ position:test }" /> -->
-    </MarkerCluster>
+    
     </GoogleMap>
   </div>
 </template>
@@ -65,31 +66,51 @@ import { defineComponent } from "vue";
 import { GoogleMap, Marker, MarkerCluster} from "vue3-google-map";
 
 export default defineComponent({
-  components: { GoogleMap, Marker, MarkerCluster },
-  props: {
-    markers: Array,
-  },
-  computed: {
-    test() {
-      console.log(this.$store.state.potholes)
-      console.log(this.$store.state.markers[0])
-      let marker = { lat: parseInt(this.$store.state.markers[0].center.lat), lng: parseInt(this.$store.state.markers[0].center.lng) }
-      console.log(marker)
-      return marker;
-    }
 
+  data() {
+    return {
+      markers: []
+    }
   },
+  components: { GoogleMap, Marker },
+  // created() {
+  //     this.$store.state.potholes.forEach(pothole => {
+  //     console.log('here')
+  //     let marker = { center: { lat: pothole.latitude, lng: pothole.longitude } }
+  //     this.$store.state.markers.push(marker)
+  //   })
+
+  // },
   methods: {
-    testCenter(marker) {
-      return marker.center;
+    testCenter() {
+      this.$store.state.potholes.forEach(pothole => {
+        let marker = {
+          id: pothole.potholeid,
+          lat: pothole.latitude,
+          lng: pothole.longitude
+        }
+        console.log("this is something ")
+        this.markers.push(marker)
+      })
     }
   },
 
   setup() {
     const center = { lat: 39.952583, lng: -75.165222 };
+    // const positions = [ { lat: -42.734358, lng: 147.439506 },
+    //   { lat: -42.734358, lng: 147.501315 },
+    //   { lat: -42.735258, lng: 147.438 },
+    //   { lat: -43.999792, lng: 170.463352 }];
+
+      // const center = {lat: -28.024, lng: 140.887 }
 
     return { center };
+  
   },
+
+  created(){
+    this.testCenter();
+  }
 });
 </script>
 
