@@ -7,6 +7,7 @@
     </div>
     <div class="container">
       <h1 class="home-title">Pothole Patrol</h1>
+     
       <p class="paragraph">At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our
         streets safer and our communities more connected. By empowering individuals to report potholes swiftly and
         efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
@@ -131,7 +132,7 @@ export default {
 }
 
 .home-title  {
-  padding-top: 100px;
+  padding-top: 190px;
   font-size: 2em;
   color: #dae906;
   text-align: center;
@@ -147,13 +148,16 @@ export default {
 
 .paragraph {
   display: flex;
-  justify-content: space-between;
- 
-  padding-left: 13px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-right: 6px;
+  padding-left: 6px;
   font-family: monospace;
-  font-size: 2.2rem;
+  font-size: 2.4rem;
   color: black;
   margin: auto;
+  padding-bottom: 150px;
 }
 
 </style>
