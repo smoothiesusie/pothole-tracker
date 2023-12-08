@@ -116,7 +116,7 @@ export default defineComponent({
 
 <style scoped>
 .map-container {
-  width: 80%;
+  width: 99%;
   height: 500px;
   margin: auto;
   padding-bottom: 20px;

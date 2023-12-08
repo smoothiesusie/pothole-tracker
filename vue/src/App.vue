@@ -14,7 +14,9 @@
     </div>
     <!-- <div>{{ $store.state.user }}</div> -->
     <router-view />
+    
   </div>
+  <footer class="footer"><span>&copy; Pothole Patrole 2023</span></footer>
 </template>
 
 
@@ -30,7 +32,8 @@
   padding-bottom: 5px;
   border-bottom: 2px solid white;
   /* background-image: url('https://images.unsplash.com/photo-1539651044670-315229da9d2f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); */
-  height: 50px
+  height: 50px;
+  padding-right: 5px;
 }
 
 .nav-links a {
@@ -67,6 +70,24 @@
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  /* padding-bottom: 20px; */
+  font-family: fantasy;
+  background-color: black;
+  color: whitesmoke;
+  
+  border-bottom: 2px solid white;
+  /* background-image: url('https://images.unsplash.com/photo-1539651044670-315229da9d2f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); */
+  height: 50px;
+  padding-top: 5px;
+  border-top: 2px solid white;
+  display: flex;
+  justify-content: center;
 }
 
 </style>

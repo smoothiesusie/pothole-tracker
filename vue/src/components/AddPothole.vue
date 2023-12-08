@@ -175,7 +175,7 @@
   border-radius: 10px;
   border: 1px solid rgba(253, 243, 243, 0.705);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.781);
-  width: 1470px;
+  width: 1835px;
   height: 300px; 
   margin: auto; 
   text-align: center;
@@ -187,6 +187,8 @@
   padding: -5px;
   position: relative;
   top: 7px;
+  color: #dae906;
+  font-size: medium;
 }
 input {
   padding: 10px; 
