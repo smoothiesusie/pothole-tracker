@@ -57,11 +57,35 @@ public class JbdcPotholeDao implements PotholeDao {
         return potholes;
     }
 
+    @Override
+    public Pothole getPotholeById(int id) {
+        Pothole pothole = null;
+
+        String sql = "SELECT potholeid, userid, latitude, longitude, severity, status, reportedat FROM potholes WHERE potholeid = ?";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+            while(results.next()){
+                 pothole = mapRowToPotholes(results);
+
+            }
+        }catch(CannotGetJdbcConnectionException e){
+            throw new DaoException("Unable to connect to server or database", e);
+        }
+        return pothole;
+    }
+
     //todo -> Need to create another override method to delete potholes by userID.. Create method in potholeDao!
     @Override
     public void deletePotholeByUserID(int userId) {
         String deleteSql = "DELETE FROM potholes WHERE userid = ?";
         jdbcTemplate.update(deleteSql, userId);
+    }
+
+    @Override
+    public void deletePotholeByID(int potholeId) {
+        String deleteSql = "DELETE FROM potholes WHERE potholeid = ?";
+        jdbcTemplate.update(deleteSql, potholeId);
     }
 
     private Pothole mapRowToPotholes(SqlRowSet rowSet) {

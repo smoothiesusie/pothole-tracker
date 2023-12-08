@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Pothole;
 import com.techelevator.model.UsersPotholeDto;
 
 import java.util.List;
@@ -9,5 +10,5 @@ public interface UsersPotholeDao {
 
     List<UsersPotholeDto> getAllUsersPotholeList();
 
-    boolean updateUsersReport(UsersPotholeDto report);
+    Pothole updateUsersReport(UsersPotholeDto report);
 }

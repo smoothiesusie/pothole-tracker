@@ -11,6 +11,11 @@ export default {
     },
 
     updateUsersReport(pothole){
-        return axios.put('/reportUpdate',pothole)
+        return axios.put(`/reportUpdate/${pothole.potholeid}`,pothole)
     },
+
+    deletePothole(id){
+        return axios.delete(`/potholes/${id}`)
+    }
+
 }

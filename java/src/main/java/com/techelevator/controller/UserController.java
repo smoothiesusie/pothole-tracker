@@ -43,8 +43,8 @@ public class UserController {
     }
 
    @ResponseStatus(HttpStatus.CREATED)
-   @RequestMapping(path = "/reportUpdate",method = RequestMethod.PUT)
-    public boolean updateUsersReport(UsersPotholeDto report) {
+   @RequestMapping(path = "/reportUpdate/{id}",method = RequestMethod.PUT)
+    public Pothole updateUsersReport(@RequestBody UsersPotholeDto report, @PathVariable int id) {
 
         return usersPotholeDao.updateUsersReport(report);
     }

@@ -13,11 +13,20 @@
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
             <div>Longitude: {{ pothole.longitude }}</div>
-            <div>Severity: {{ pothole.severity }}</div>
-            <div>Status: {{ pothole.status }}</div>
+
+            <label for="severity" v-if="pothole.isClicked">Severity: </label>
+            <input name="severity" type='text' v-model="pothole.severity" v-if="pothole.isClicked">
+            <div v-else>Severity: {{ pothole.severity }}</div>
+
+            <label for="status" v-if="pothole.isClicked">Status: </label>
+            <input name="status" type='text' v-model="pothole.status" v-if="pothole.isClicked">
+            <div v-else>Status: {{ pothole.status }}</div>
             <div>Date Reported: {{ pothole.reportedAt }}</div>
             <div>Reported By: {{ pothole.username }}</div>
-            <button class="update" v-if="isUserAdmin">Update Status</button>
+            <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">Update
+              Status</button>
+            <button v-on:click="updateStatus(pothole)" v-else>Submit</button>
+            <button v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
 
           </div>
 
@@ -27,7 +36,7 @@
 
     </div>
 
-    <Maps/>
+    <Maps />
 
   </div>
 </template>
@@ -52,9 +61,12 @@ export default {
       potholes: [],
       users: [],
       isLoading: true,
-      markers: []
+      markers: [],
+      isClicked: false
     };
   },
+
+
 
   created() {
     this.fetchPotholes();
@@ -80,12 +92,49 @@ export default {
 
       })
 
+    },
+
+    deletePothole(pothole){
+      PotholeService.deletePothole(pothole.potholeid).then(response =>{
+        this.fetchPotholes()
+      })
+    },
+
+
+    updateStatus(pothole) {
+
+      PotholeService.updateUsersReport(pothole).then(response => {
+        pothole = response.data;
+        pothole.isClicked = false
+        console.log(pothole)
+        this.$router.go()
+
+
+
+
+      })
+    },
+    updateClicked(pothole) {
+      if (!this.oneClicked) {
+        pothole.isClicked = true;
+      }
     }
+
+
   },
   computed: {
     isUserAdmin() {
       const currentUser = this.$store.state.user;
       return currentUser && currentUser.authorities.some(auth => auth.name === 'ROLE_ADMIN');
+    },
+    oneClicked() {
+      let clicked = false;
+      this.potholes.forEach(pothole => {
+        if (pothole.isClicked) {
+          clicked = true;
+        }
+      })
+      return clicked;
     }
   },
 }

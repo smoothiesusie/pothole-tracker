@@ -14,4 +14,8 @@ public interface PotholeDao {
         //todo create Pothole getPotholeByUserId(int userId)
         void deletePotholeByUserID(int userId);
 
+        public Pothole getPotholeById(int id);
+
+        public void deletePotholeByID(int potholeId);
+
 }

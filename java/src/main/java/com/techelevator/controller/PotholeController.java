@@ -43,10 +43,18 @@ public class PotholeController {
         return potholeDao.getAllPotholes();
     }
 
+
+
     //todo -> create a controller for public Pothole deletePotholeByUserID(it will take a path variable which will be userID)
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/potholes/user/{userId}")
     public void deletePotholeByUserID(@PathVariable int userId) {
         potholeDao.deletePotholeByUserID(userId);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping("/potholes/{potholeid}")
+    public void deletePotholeByID(@PathVariable int potholeid) {
+        potholeDao.deletePotholeByID(potholeid);
     }
 }

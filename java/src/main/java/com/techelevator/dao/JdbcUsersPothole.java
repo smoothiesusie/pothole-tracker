@@ -16,9 +16,11 @@ import java.util.List;
 public class JdbcUsersPothole implements UsersPotholeDao{
 
     private final JdbcTemplate jdbcTemplate;
+    private PotholeDao potholeDao;
 
-    public JdbcUsersPothole(JdbcTemplate jdbcTemplate) {
+    public JdbcUsersPothole(JdbcTemplate jdbcTemplate, PotholeDao potholeDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.potholeDao = potholeDao;
     }
 
 
@@ -62,10 +64,11 @@ public class JdbcUsersPothole implements UsersPotholeDao{
     }
 
     @Override
-    public boolean updateUsersReport(UsersPotholeDto report) {
+    public Pothole updateUsersReport(UsersPotholeDto report) {
         String sql = "UPDATE potholes SET severity = ?, status = ? WHERE potholeid = ?;";
 
-        return jdbcTemplate.update(sql, report.getSeverity(), report.getStatus(), report.getPotholeid()) > 0;
+        jdbcTemplate.update(sql, report.getSeverity(), report.getStatus(), report.getPotholeid());
+        return potholeDao.getPotholeById(report.getPotholeid());
     }
 
 

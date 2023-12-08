@@ -2,7 +2,7 @@
   <div id="capstone-app">
     <div id="nav">
       <div class="nav-welcome">
-        <p>Saving the world one potHole at a time!</p>
+        <p>Saving the world one Pothole at a time!</p>
       </div>
       <div class="divider"></div>
       <div class="nav-links">
@@ -16,7 +16,7 @@
     <router-view />
     
   </div>
-  <footer class="footer"><span>&copy; Pothole Patrole 2023</span></footer>
+  <footer class="footer"><span>&copy; Pothole Patrol 2023</span></footer>
 </template>
 
 
