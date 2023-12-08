@@ -8,4 +8,6 @@ public interface UsersPotholeDao {
     UsersPotholeDto getUserByPotholeId(int id);
 
     List<UsersPotholeDto> getAllUsersPotholeList();
+
+    boolean updateUsersReport(UsersPotholeDto report);
 }

@@ -8,5 +8,9 @@ export default {
 
     addNewPothole(pothole) {
         return axios.post('/addPothole', pothole)
-    }
+    },
+
+    updateUsersReport(pothole){
+        return axios.put('/reportUpdate',pothole)
+    },
 }

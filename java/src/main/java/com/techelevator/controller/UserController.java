@@ -42,5 +42,10 @@ public class UserController {
         return usersPotholeDao.getAllUsersPotholeList();
     }
 
+   @ResponseStatus(HttpStatus.CREATED)
+   @RequestMapping(path = "/reportUpdate",method = RequestMethod.PUT)
+    public boolean updateUsersReport(UsersPotholeDto report) {
 
+        return usersPotholeDao.updateUsersReport(report);
+    }
 }

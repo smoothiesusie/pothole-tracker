@@ -61,6 +61,13 @@ public class JdbcUsersPothole implements UsersPotholeDao{
         return potholes;
     }
 
+    @Override
+    public boolean updateUsersReport(UsersPotholeDto report) {
+        String sql = "UPDATE potholes SET severity = ?, status = ? WHERE potholeid = ?;";
+
+        return jdbcTemplate.update(sql, report.getSeverity(), report.getStatus(), report.getPotholeid()) > 0;
+    }
+
 
     private UsersPotholeDto mapRowToUsersPothole(SqlRowSet rowset) {
         UsersPotholeDto usersPothole = new UsersPotholeDto();
