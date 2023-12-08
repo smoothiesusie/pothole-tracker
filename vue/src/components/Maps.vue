@@ -83,6 +83,7 @@ export default defineComponent({
   // },
   methods: {
     testCenter() {
+      
       this.$store.state.potholes.forEach(pothole => {
         let marker = {
           id: pothole.potholeid,
@@ -91,7 +92,9 @@ export default defineComponent({
         }
         console.log("this is something ")
         this.markers.push(marker)
+        
       })
+      
     }
   },
 

@@ -80,6 +80,7 @@ export default {
       this.$store.state.markers.push(marker)
     })
     this.isLoading = false;
+    
 
 
   },
@@ -100,6 +101,7 @@ export default {
     deletePothole(pothole){
       PotholeService.deletePothole(pothole.potholeid).then(response =>{
         this.fetchPotholes()
+        this.$router.go()
       })
     },
 
@@ -110,7 +112,7 @@ export default {
         pothole = response.data;
         pothole.isClicked = false
         console.log(pothole)
-        this.$router.go()
+       
 
 
 
