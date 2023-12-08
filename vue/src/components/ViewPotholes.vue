@@ -20,13 +20,15 @@
 
             <label for="status" v-if="pothole.isClicked">Status: </label>
             <input name="status" type='text' v-model="pothole.status" v-if="pothole.isClicked">
+            <label for="inspected" >Inspected Date: {{ pothole.inspectedDate || 'Not Inspected Yet' }}</label>
+            <input name="inspected" type='date' v-model="pothole.inspectedDate" v-if="pothole.isClicked">
             <div v-else>Status: {{ pothole.status }}</div>
             <div>Date Reported: {{ pothole.reportedAt }}</div>
             <div>Reported By: {{ pothole.username }}</div>
             <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">Update
               Status</button>
-            <button v-on:click="updateStatus(pothole)" v-else>Submit</button>
-            <button v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
+            <button class="update" v-on:click="updateStatus(pothole)" v-else>Submit</button>
+            <button class="update" v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
 
           </div>
 
@@ -203,8 +205,8 @@ export default {
 
 .view-potholes {
 
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  /* backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px); */
 }
 
 .detail-container {
@@ -228,7 +230,7 @@ export default {
 
 .detail-container:hover {
   transform: scale(1.05);
-  box-shadow: 5px 5px 10px grey;
+  /* box-shadow: 5px 5px 10px grey; */
 }
 
 .title {
