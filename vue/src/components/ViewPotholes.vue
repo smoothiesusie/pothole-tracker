@@ -27,7 +27,8 @@
             <div>Reported By: {{ pothole.username }}</div>
             <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">Update
               Status</button>
-            <button class="update" v-on:click="updateStatus(pothole)" v-else>Submit</button>
+            <button class="update"  v-if="isUserAdmin && pothole.isClicked" v-on:click="updateStatus(pothole)" >Submit</button>
+            
             <button class="update" v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
 
           </div>
