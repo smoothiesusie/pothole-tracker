@@ -7,7 +7,8 @@ export function createStore(currentToken, currentUser) {
       token: currentToken || '',
       user: currentUser || {},
       potholes: [],
-      markers: []
+      markers: [],
+      fixedPotholes: localStorage.getItem('fixedPotholes') ? parseInt(localStorage.getItem('fixedPotholes')) : 0,
     },
     mutations: {
       SET_AUTH_TOKEN(state, token) {
@@ -25,7 +26,11 @@ export function createStore(currentToken, currentUser) {
         state.token = '';
         state.user = {};
         axios.defaults.headers.common = {};
-      }
+      },
+      INCREMENT_FIXED_POTHOLES(state) {
+        state.fixedPotholes++;
+        localStorage.setItem('fixedPotholes', state.fixedPotholes);
+      },
     },
   });
   return store;

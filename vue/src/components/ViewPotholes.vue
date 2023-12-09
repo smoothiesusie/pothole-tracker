@@ -1,6 +1,11 @@
 <template>
   <div class="full-background">
+    <div class="top-text">
+    
+    <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
     <h2 class="title">View Potholes</h2>
+    <p class="reported-holes"> Fixed Potholes: {{ fixedPotholes }}</p>
+  </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">
         Loading potholes...
@@ -9,7 +14,9 @@
         No potholes reported yet.
       </div>
       <ul v-else>
+        
         <div v-for="pothole in potholes" :key="pothole.id">
+          
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
             <div>Longitude: {{ pothole.longitude }}</div>
@@ -65,7 +72,8 @@ export default {
       users: [],
       isLoading: true,
       markers: [],
-      isClicked: false
+      isClicked: false,
+      // fixedPotholes: 0
     };
   },
 
@@ -101,8 +109,11 @@ export default {
     deletePothole(pothole){
       PotholeService.deletePothole(pothole.potholeid).then(response =>{
         this.fetchPotholes()
-        this.$router.go()
+        // this.$router.go()
+        this.$store.commit('INCREMENT_FIXED_POTHOLES');
+        
       })
+      
     },
 
 
@@ -112,6 +123,7 @@ export default {
         pothole = response.data;
         pothole.isClicked = false
         console.log(pothole)
+        this.$router.go()
        
 
 
@@ -140,7 +152,10 @@ export default {
         }
       })
       return clicked;
-    }
+    },
+    fixedPotholes() {
+      return this.$store.state.fixedPotholes;
+    },
   },
 }
 </script>
@@ -254,6 +269,17 @@ export default {
   font-size: 6rem;
   font-family: monospace;
   color: rgb(160, 216, 216);
+}
+
+.top-text {
+  color:  rgb(208, 243, 8);
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  font-family: monospace;
+  border-bottom: 2px solid white;
+  padding: 5px;
+
 }
 </style>
   
