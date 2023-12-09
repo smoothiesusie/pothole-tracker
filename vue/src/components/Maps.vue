@@ -53,11 +53,9 @@
     <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center"
       :zoom="15">
       
-        @click="onMarkerClick(marker)  :markerData="selectedMarkerData"
-      <Marker  v-for="marker in markers" :key="marker.id"
-        :options="{ position: { lat: marker.lat, lng: marker.lng }, visible: true, clickable: true }"
-        @click="onMarkerClick(marker)"
-      />
+      <Marker v-for="marker in markers" :key="marker.id"
+  :options="{ position: { lat: marker.lat, lng: marker.lng }, visible: true, clickable: true}"
+  @click="emitMarkerClick(marker.id)" />
       <!-- <Marker :options="{ position:test }" /> -->
       
     
@@ -87,9 +85,15 @@ export default defineComponent({
 
   // },
   methods: {
+    emitMarkerClick(markerId) {
+    this.$emit('marker-clicked', markerId);
+    console.log("marker has been clicked")
+  },
+
     onMarkerClick(marker){
     console.log("the marker has been clicked!!")
     this.selectedMarkerData = marker
+
   },
 
     testCenter() {

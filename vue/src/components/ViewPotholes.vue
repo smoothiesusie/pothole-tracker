@@ -15,7 +15,7 @@
       </div>
       <ul v-else>
         
-        <div v-for="pothole in potholes" :key="pothole.id">
+        <div v-for="pothole in potholes" :key="pothole.id"  :class="{ 'highlighted': pothole.highlighted }">
           
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
@@ -46,7 +46,7 @@
 
     </div>
 
-    <Maps />
+    <Maps @marker-clicked="handleMarkerClick"/>
 
   </div>
 </template>
@@ -135,9 +135,16 @@ export default {
       if (!this.oneClicked) {
         pothole.isClicked = true;
       }
+    },
+    handleMarkerClick(markerId) {
+    const potholeIndex = this.potholes.findIndex(p => p.potholeid === markerId);
+    if (potholeIndex > -1) {
+      const selectedPothole = this.potholes[potholeIndex];
+      selectedPothole.highlighted = true; 
+      this.potholes.unshift(this.potholes.splice(potholeIndex, 1)[0]); 
     }
-
-
+  },
+ 
   },
   computed: {
     isUserAdmin() {
@@ -156,8 +163,8 @@ export default {
     fixedPotholes() {
       return this.$store.state.fixedPotholes;
     },
-  },
-}
+  }
+,}
 </script>
   
 <style scoped>
@@ -280,6 +287,10 @@ export default {
   border-bottom: 2px solid white;
   padding: 5px;
 
+}
+
+.highlighted {
+  background-color: rgb(13, 173, 173);
 }
 </style>
   
