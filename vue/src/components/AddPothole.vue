@@ -14,16 +14,16 @@
           <input id="longitude" v-model="pothole.longitude" type="number" required>
         </div>
         <div>
-          <label for="severity">Severity:</label>
-          <input id="severity" v-model="pothole.severity" type="number" min="1" max="5" required>
+          <!-- <label for="severity">Severity:</label>
+          <input id="severity" v-model="pothole.severity" type="number" min="1" max="5" required> -->
         </div>
         <div>
-          <label for="status">Status:</label>
+          <!-- <label for="status">Status:</label>
           <select id="status" v-model="pothole.status">
             <option value="reported">Reported</option>
             <option value="in_progress">In Progress</option>
             <option value="fixed">Fixed</option>
-          </select>
+          </select> -->
         </div>
         
       </form>

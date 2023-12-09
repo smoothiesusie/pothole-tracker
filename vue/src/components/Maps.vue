@@ -53,9 +53,13 @@
     <GoogleMap api-key="AIzaSyBecan41m3EpaUjgHsf4QnYHDuuJ9HpZ_M" style="width: 100%; height: 500px" :center="center"
       :zoom="15">
       
-      <Marker v-for="marker in markers" :key="marker.id"
-      :options="{ position: { lat: marker.lat, lng: marker.lng }, visible: true }"/>
+        @click="onMarkerClick(marker)  :markerData="selectedMarkerData"
+      <Marker  v-for="marker in markers" :key="marker.id"
+        :options="{ position: { lat: marker.lat, lng: marker.lng }, visible: true, clickable: true }"
+        @click="onMarkerClick(marker)"
+      />
       <!-- <Marker :options="{ position:test }" /> -->
+      
     
     </GoogleMap>
   </div>
@@ -63,13 +67,14 @@
   
 <script>
 import { defineComponent } from "vue";
-import { GoogleMap, Marker, MarkerCluster} from "vue3-google-map";
+import { GoogleMap, Marker} from "vue3-google-map";
 
 export default defineComponent({
 
   data() {
     return {
-      markers: []
+      markers: [],
+      selectedMarkerData: null,
     }
   },
   components: { GoogleMap, Marker },
@@ -82,6 +87,11 @@ export default defineComponent({
 
   // },
   methods: {
+    onMarkerClick(marker){
+    console.log(this.selectedMarkerData = marker)
+    this.selectedMarkerData = marker
+  },
+
     testCenter() {
       
       this.$store.state.potholes.forEach(pothole => {
@@ -113,7 +123,7 @@ export default defineComponent({
 
   created(){
     this.testCenter();
-  }
+  },
 });
 </script>
 
