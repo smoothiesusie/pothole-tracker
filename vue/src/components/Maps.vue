@@ -88,7 +88,7 @@ export default defineComponent({
   // },
   methods: {
     onMarkerClick(marker){
-    console.log(this.selectedMarkerData = marker)
+    console.log("the marker has been clicked!!")
     this.selectedMarkerData = marker
   },
 
