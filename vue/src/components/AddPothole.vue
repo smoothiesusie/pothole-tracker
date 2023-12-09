@@ -1,4 +1,5 @@
 <template>
+  <div class="fullpage">
   <div class="full-page-wrapper">
     <!-- <h1 class="title">Pothole Patrol</h1> -->
     <div class="add-pothole">
@@ -35,6 +36,7 @@
     
   </div>
   <div class="map-container" ><Maps/></div>
+</div>
   </template>
   <script>
 
@@ -160,6 +162,7 @@
     justify-content: center;
     align-items: center;
     margin-top: -285px;
+    padding-bottom: 35px
     
   }
   .add-pothole {

@@ -1,11 +1,11 @@
 <template>
   <div class="full-background">
     <div class="top-text">
-    
-    <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
-    <h2 class="title">View Potholes</h2>
-    <p class="reported-holes"> Fixed Potholes: {{ fixedPotholes }}</p>
-  </div>
+
+      <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
+      <h2 class="title">View Potholes</h2>
+      <p class="reported-holes"> Fixed Potholes: {{ fixedPotholes }}</p>
+    </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">
         Loading potholes...
@@ -14,9 +14,9 @@
         No potholes reported yet.
       </div>
       <ul v-else>
-        
-        <div v-for="pothole in potholes" :key="pothole.id"  :class="{ 'highlighted': pothole.highlighted }" >
-          
+
+        <div v-for="pothole in potholes" :key="pothole.id" :class="{ 'highlighted': pothole.highlighted }">
+
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
             <div>Longitude: {{ pothole.longitude }}</div>
@@ -27,30 +27,30 @@
 
             <label for="status" v-if="pothole.isClicked">Status: </label>
             <input name="status" type='text' v-model="pothole.status" v-if="pothole.isClicked">
-            <label for="inspected" >Inspected Date: {{ pothole.inspectedDate || 'Not Inspected Yet' }}</label>
+            <label for="inspected">Inspected Date: {{ pothole.inspectedDate || 'Not Inspected Yet' }}</label>
             <input name="inspected" type='date' v-model="pothole.inspectedDate" v-if="pothole.isClicked">
             <div v-else>Status: {{ pothole.status }}</div>
             <div>Date Reported: {{ pothole.reportedAt }}</div>
             <div>Reported By: {{ pothole.username }}</div>
             <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">Update
               Status</button>
-            <button class="update"  v-if="isUserAdmin && pothole.isClicked" v-on:click="updateStatus(pothole)" >Submit</button>
-            
+            <button class="update" v-if="isUserAdmin && pothole.isClicked"
+              v-on:click="updateStatus(pothole)">Submit</button>
+
             <button class="update" v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
-          
+
           </div>
 
-        
+
         </div>
-      
+
       </ul>
 
     </div>
 
-    <Maps @marker-clicked="handleMarkerClick"/>
+    <Maps @marker-clicked="handleMarkerClick" />
 
   </div>
-
 </template>
   
 <script>
@@ -90,7 +90,7 @@ export default {
       this.$store.state.markers.push(marker)
     })
     this.isLoading = false;
-    
+
 
 
   },
@@ -108,14 +108,14 @@ export default {
 
     },
 
-    deletePothole(pothole){
-      PotholeService.deletePothole(pothole.potholeid).then(response =>{
+    deletePothole(pothole) {
+      PotholeService.deletePothole(pothole.potholeid).then(response => {
         this.fetchPotholes()
         // this.$router.go()
         this.$store.commit('INCREMENT_FIXED_POTHOLES');
-        
+
       })
-      
+
     },
 
 
@@ -126,7 +126,7 @@ export default {
         pothole.isClicked = false
         console.log(pothole)
         this.$router.go()
-       
+
 
 
 
@@ -139,14 +139,14 @@ export default {
       }
     },
     handleMarkerClick(markerId) {
-    const potholeIndex = this.potholes.findIndex(p => p.potholeid === markerId);
-    if (potholeIndex > -1) {
-      const selectedPothole = this.potholes[potholeIndex];
-      selectedPothole.highlighted = true; 
-      this.potholes.unshift(this.potholes.splice(potholeIndex, 1)[0]); 
-    }
-  },
- 
+      const potholeIndex = this.potholes.findIndex(p => p.potholeid === markerId);
+      if (potholeIndex > -1) {
+        const selectedPothole = this.potholes[potholeIndex];
+        selectedPothole.highlighted = true;
+        this.potholes.unshift(this.potholes.splice(potholeIndex, 1)[0]);
+      }
+    },
+
   },
   computed: {
     isUserAdmin() {
@@ -166,7 +166,8 @@ export default {
       return this.$store.state.fixedPotholes;
     },
   }
-,}
+  ,
+}
 </script>
   
 <style scoped>
@@ -229,13 +230,15 @@ export default {
   white-space: nowrap;
   padding: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
 }
 
-.view-potholes {
+/* .view-potholes {
+  padding: 5px;
+  border: 5px;
 
-  /* backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px); */
-}
+} */
 
 .detail-container {
   display: flex;
@@ -244,7 +247,7 @@ export default {
   flex-direction: column;
   width: 250px;
   height: 250px;
-  margin: 10px;
+  /* margin: 10px; */
   justify-content: space-around;
   box-shadow: 2px 2px 5px grey;
   background: rgba(255, 255, 255, 0.5);
@@ -253,12 +256,14 @@ export default {
   border-radius: 10px;
   color: black;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+  /* padding: 10px; */
 }
 
 .detail-container:hover {
   transform: scale(1.05);
   /* box-shadow: 5px 5px 10px grey; */
+  background-color: rgba(255, 255, 255, 0.808);
+  
 }
 
 .title {
@@ -282,7 +287,7 @@ export default {
 }
 
 .top-text {
-  color:  rgb(208, 243, 8);
+  color: rgb(208, 243, 8);
   display: flex;
   justify-content: space-between;
   font-size: 2rem;
@@ -294,6 +299,12 @@ export default {
 
 .highlighted {
   background-color: rgb(13, 173, 173);
+  border-radius: 15px 15px 15px 15px;
+  padding: 5px;
+  border: 2px solid rgb(255, 255, 255);
+  border-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .pothole-list-move {
