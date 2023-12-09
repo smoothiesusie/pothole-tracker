@@ -8,6 +8,7 @@ import LogoutView from '../views/LogoutView.vue';
 import RegisterView from '../views/RegisterView.vue';
 import PotholeView from '../views/PotholeView.vue';  //this will take you to addNewPothole.. Name will be changed soon
 import ViewAllPotholeView from '../views/ViewAllPotholesView.vue';
+import GuestView from '../views/GuestView.vue';
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -60,8 +61,13 @@ const routes = [
     path: "/potholeList",
     name: "potholeList",
     component: ViewAllPotholeView
-  }
+  },
 
+  {
+    path: "/guestView",
+    name: "guestView",
+    component: GuestView
+  }
 
 ];
 

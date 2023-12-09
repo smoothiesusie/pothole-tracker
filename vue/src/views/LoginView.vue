@@ -25,6 +25,7 @@
       <button type="submit" id="submit">Sign in</button>
       <p>
       <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+      <p><router-link to="/guestView">View Potholes as Guest</router-link></p>
     </div>
     </form>
   
