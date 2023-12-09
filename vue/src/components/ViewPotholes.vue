@@ -15,7 +15,7 @@
       </div>
       <ul v-else>
         
-        <div v-for="pothole in potholes" :key="pothole.id"  :class="{ 'highlighted': pothole.highlighted }">
+        <div v-for="pothole in potholes" :key="pothole.id"  :class="{ 'highlighted': pothole.highlighted }" >
           
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
@@ -37,11 +37,12 @@
             <button class="update"  v-if="isUserAdmin && pothole.isClicked" v-on:click="updateStatus(pothole)" >Submit</button>
             
             <button class="update" v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">Delete</button>
-
+          
           </div>
 
-
+        
         </div>
+      
       </ul>
 
     </div>
@@ -49,6 +50,7 @@
     <Maps @marker-clicked="handleMarkerClick"/>
 
   </div>
+
 </template>
   
 <script>
@@ -226,6 +228,7 @@ export default {
   overflow-x: auto;
   white-space: nowrap;
   padding: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .view-potholes {
@@ -291,6 +294,10 @@ export default {
 
 .highlighted {
   background-color: rgb(13, 173, 173);
+}
+
+.pothole-list-move {
+  transition: transform 1s ease;
 }
 </style>
   
