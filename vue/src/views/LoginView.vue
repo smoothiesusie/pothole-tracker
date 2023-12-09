@@ -23,9 +23,9 @@
       </div>
     
       <button type="submit" id="submit">Sign in</button>
-      <p>
-      <router-link v-bind:to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
-      <p><router-link to="/guestView">View Potholes as Guest</router-link></p>
+      <!-- <p>
+      <router-link v-bind:to="{ name: 'register'}">Need an account? Sign up.</router-link></p> -->
+      <p><router-link class="GuestView" to="/guestView">View Potholes as Guest</router-link></p>
     </div>
     </form>
   
@@ -186,6 +186,15 @@ export default {
   padding-left: 10px;
   background-color: rgba(255, 255, 255, 0.8);
   font-family: monospace;
+}
+
+.GuestView {
+  font-size: 1.2rem;
+  color: rgb(251, 255, 255);
+}
+
+.GuestView:hover {
+  color: #d4d896;
 }
 
 </style>

@@ -28,8 +28,15 @@
         </div>
         
       </form>
-      <button type="submit" class="pothole-button" @click="submitPothole">Add Pothole</button>
-      
+      <div v-if="showModal" class="modal">
+        <div class="modal-content">
+          <p>Pothole Has Been Submitted!</p>
+          <button @click="showModal = false">OK</button>
+    </div>
+    </div>
+
+    <button type="submit" class="pothole-button" @click="submitPothole" >Add Pothole</button>
+    
       
     </div>
     
@@ -57,7 +64,8 @@
           severity: 1,
           status: 'reported'
         },
-        markers: []
+        markers: [],
+        showModal: false
       };
     },
     methods: {
@@ -79,6 +87,8 @@
     console.log(this.pothole)
     this.$store.state.potholes.push(this.pothole)
     this.$router.push("/")
+    alert("pothole has been submitted!")
+    this.showModal = true;
    
   });
   
@@ -236,6 +246,28 @@ input {
   transform: scaleY(1.2);
   border: 2px solid white;
 }
+
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+
 </style>
 
   

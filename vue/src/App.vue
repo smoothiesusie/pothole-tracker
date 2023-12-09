@@ -8,6 +8,7 @@
       <div class="nav-links">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
         <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
+        <router-link v-bind:to="{name: 'register'}" v-if="!$store.state.user || !$store.state.user.username">Register!</router-link>
         <div class="user-info">Welcome to Pothole Patrol, {{ $store.state.user.username }}</div>
 
       </div>
