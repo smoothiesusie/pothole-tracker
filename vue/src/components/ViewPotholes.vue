@@ -4,26 +4,22 @@
       <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
       <h2 class="title">View Potholes</h2>
       <p class="reported-holes">Fixed Potholes: {{ fixedPotholes }}</p>
+      
+    </div>
+    <div class="searchPothole">
+      <button class="searchPothole">Click To filter your reported potholes</button>
     </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">Loading potholes...</div>
       <div v-if="potholes.length === 0">No potholes reported yet.</div>
       <ul v-else>
-        <div
-          v-for="pothole in potholes"
-          :key="pothole.id"
-          :class="{ highlighted: pothole.highlighted }"
-        >
+        <div v-for="pothole in potholes" :key="pothole.id" :class="{ highlighted: pothole.highlighted }">
           <div class="detail-container">
             <div>Latitude: {{ pothole.latitude }}</div>
             <div>Longitude: {{ pothole.longitude }}</div>
 
             <label for="severity" v-if="pothole.isClicked">Severity: </label>
-            <select
-              name="severity"
-              v-model="pothole.severity"
-              v-if="pothole.isClicked"
-            >
+            <select name="severity" v-model="pothole.severity" v-if="pothole.isClicked">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -33,49 +29,26 @@
             <div v-else>Severity: {{ pothole.severity }}</div>
 
             <label for="status" v-if="pothole.isClicked">Status: </label>
-            <select
-              name="status"
-              v-model="pothole.status"
-              v-if="pothole.isClicked"
-            >
+            <select name="status" v-model="pothole.status" v-if="pothole.isClicked">
               <option value="In Review">In Review</option>
               <option value="In Progress">In Progress</option>
               <option value="Fixed">Fixed</option>
             </select>
             <!-- <div v-else>Status: {{ pothole.status }}</div> -->
-            <label for="inspected"
-              >Inspected Date:
-              {{ pothole.inspectedDate || "Not Inspected Yet" }}</label
-            >
-            <input
-              name="inspected"
-              type="date"
-              v-model="pothole.inspectedDate"
-              v-if="pothole.isClicked"
-            />
+            <label for="inspected">Inspected Date:
+              {{ pothole.inspectedDate || "Not Inspected Yet" }}</label>
+            <input name="inspected" type="date" v-model="pothole.inspectedDate" v-if="pothole.isClicked" />
             <div v-else>Status: {{ pothole.status }}</div>
             <div>Date Reported: {{ pothole.reportedAt }}</div>
             <div>Reported By: {{ pothole.username }}</div>
-            <button
-              class="update"
-              v-if="isUserAdmin && !pothole.isClicked"
-              v-on:click="updateClicked(pothole)"
-            >
+            <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">
               Update Status
             </button>
-            <button
-              class="update"
-              v-if="isUserAdmin && pothole.isClicked"
-              v-on:click="updateStatus(pothole)"
-            >
+            <button class="update" v-if="isUserAdmin && pothole.isClicked" v-on:click="updateStatus(pothole)">
               Submit
             </button>
 
-            <button
-              class="update"
-              v-if="pothole.isClicked"
-              v-on:click="deletePothole(pothole)"
-            >
+            <button class="update" v-if="pothole.isClicked" v-on:click="deletePothole(pothole)">
               Delete
             </button>
           </div>
@@ -322,5 +295,12 @@ export default {
 
 .pothole-list-move {
   transition: transform 1s ease;
+}
+
+.searchPothole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 10px 10px 10px 10px;
 }
 </style>

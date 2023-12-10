@@ -92,5 +92,12 @@
   justify-content: center;
 }
 
+
+/* @media (max-width: 768px){
+  .nav-welcome{
+    width: 100%;
+    padding: 15px;
+  }
+} */
 </style>
 

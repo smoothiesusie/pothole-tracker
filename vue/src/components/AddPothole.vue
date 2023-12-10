@@ -268,6 +268,23 @@ input {
 }
 
 
+@media (max-width: 768px){
+  .fullpage{
+    width: 100%;
+    height: 50%;
+    padding: 15px;
+  }
+}
+
+
+@media (max-width: 400px){
+  .full-page{
+    width: 100%;
+    padding:10px;
+    height: 50%;
+  }
+}
+
 </style>
 
   
