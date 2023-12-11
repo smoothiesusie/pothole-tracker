@@ -8,14 +8,21 @@
     <div class="container">
       <h1 class="home-title">Pothole Patrol</h1>
      
-      <p class="paragraph">At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our
+      <p class="paragraph">
+        At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our
         streets safer and our communities more connected. By empowering individuals to report potholes swiftly and
         efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
+        </p>
+        <p class="paragraph">
 
         Each reported pothole symbolizes a step towards smoother, safer journeys for everyone. It's more than just an app;
-        it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. Together,
+        it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. 
+      </p>
+      <p class="paragraph">
+        Together,
         we're not just repairing the roads — we're building the foundation for a more responsive and caring world, one
-        application at a time.</p>
+        application at a time.
+      </p>
     </div>
   </div>
 </template>
@@ -100,10 +107,11 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:space-between;
+  justify-content:space-around;
   height: 55px;
   width: 1000px;
-  padding-bottom: 100px;
+  padding-top: 40px;
+  padding-bottom: 75px;
   text-align: center;
   border-top: 20px;
   margin-bottom: -30px;
@@ -129,12 +137,12 @@ export default {
 }
 
 .click:hover {
-  background-color: rgb(17, 109, 109);
+  background-color: aqua;
   transform: scaleY(1.2);
 }
 
 .home-title  {
-  padding-top: 190px;
+  padding-top: 140px;
   font-size: 2em;
   color: #dae906;
   text-align: center;
@@ -156,10 +164,10 @@ export default {
   padding-right: 6px;
   padding-left: 6px;
   font-family: monospace, Arial Narrow Impact, Haettenschweiler, 'Arial Narrow Bold';
-  font-size: 2.0rem;
+  font-size: 1.75rem;
   color: whitesmoke;
   margin: auto;
-  padding-bottom: 150px;
+  padding-bottom: 40px;
 }
 
 </style>

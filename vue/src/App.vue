@@ -2,7 +2,7 @@
   <div id="capstone-app">
     <div id="nav">
       <div class="nav-welcome">
-        <p>Saving the world one Pothole at a time!</p>
+        <p>Saving the world ONE POTHOLE at a time!</p>
       </div>
       <div class="divider"></div>
       <div class="nav-links">
@@ -49,10 +49,14 @@
 
 .nav-welcome p {
   margin: 0; 
-  text-shadow: 2px 2px 3px rgb(214, 214, 195); 
-  color: rgb(253, 228, 6);
-  font-size: larger;
-  padding-left: 10px;
+  /* text-shadow: 2px 2px 3px rgb(214, 214, 195);  */
+  color:white;
+  font-size: xx-large;
+  padding-left: 600px;
+  align-items: center;
+  
+  
+  
 
   
 }
