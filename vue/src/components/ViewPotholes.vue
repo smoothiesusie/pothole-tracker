@@ -7,7 +7,10 @@
       
     </div>
     <div class="searchPothole">
-      <button class="searchPothole">Click To filter your reported potholes</button>
+      <button  @click="displayUserPotholes" class="update">
+        {{ showingUserPotholes ? 'View All Reported Potholes' : 'View Your Reported Potholes'}}
+      </button>
+  
     </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">Loading potholes...</div>
@@ -78,6 +81,9 @@ export default {
       isLoading: true,
       markers: [],
       isClicked: false,
+      originalPotholes: [],
+      currentUserPotholes: [],
+      showingUserPotholes: false,
       // fixedPotholes: 0
     };
   },
@@ -103,6 +109,7 @@ export default {
         this.$store.state.potholes = response.data;
         this.isLoading = false;
       });
+      this.originalPotholes = [...this.potholes];
     },
 
     deletePothole(pothole) {
@@ -136,6 +143,46 @@ export default {
         this.potholes.unshift(this.potholes.splice(potholeIndex, 1)[0]);
       }
     },
+
+    displayUserPotholes() {
+      this.showingUserPotholes = !this.showingUserPotholes
+
+    if (this.potholes && this.potholes.length > 0 && this.showingUserPotholes) {
+      const filteredPotholes = this.potholes.filter(pothole => {
+
+        return pothole.username === this.$store.state.user.username;
+      });
+
+      console.log("Filtered Potholes:", JSON.parse(JSON.stringify(this.potholes)));
+
+      if (filteredPotholes.length > 0) {
+        this.potholes = filteredPotholes;
+      } else {
+        console.log("No potholes found for current user.");
+        // Optionally handle the case where no potholes match
+      }
+    } else {
+      console.log("Potholes array not loaded or empty.");
+      this.potholes = this.$store.state.potholes
+    }
+
+//     this.showingUserPotholes = !this.showingUserPotholes; // Toggle the state
+
+// if (this.showingUserPotholes) {
+//   // Filter and display only current user's potholes
+//   const currentUserUsername = this.$store.state.user.username;
+//   this.potholes = this.originalPotholes.filter(pothole => 
+//     pothole.username === currentUserUsername
+//   );
+// } else {
+//   // Display all potholes
+//   this.potholes = [...this.originalPotholes];
+
+// }
+
+
+
+  },
   },
   computed: {
     isUserAdmin() {
