@@ -8,7 +8,7 @@
     </div>
     <div class="searchPothole">
       <button  @click="displayUserPotholes" class="update">
-        {{ showingUserPotholes ? 'View All Reported Potholes' : 'View Your Reported Potholes'}}
+        {{ showingUserPotholes ? 'View All Reported Potholes' : 'View Your Reported Potholes'}} 
       </button>
   
     </div>
@@ -125,7 +125,10 @@ export default {
         pothole = response.data;
         pothole.isClicked = false;
         console.log(pothole);
-        this.$router.go();
+        alert("pothole has been updated")
+        // this.$router.go();
+        this.$router.push('/')
+        
       });
     },
     updateClicked(pothole) {
@@ -159,7 +162,7 @@ export default {
         this.potholes = filteredPotholes;
       } else {
         console.log("No potholes found for current user.");
-        // Optionally handle the case where no potholes match
+        
       }
     } else {
       console.log("Potholes array not loaded or empty.");
