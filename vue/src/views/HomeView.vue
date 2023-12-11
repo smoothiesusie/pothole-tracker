@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <div class="buttons">
-      <button class="click" @click="goToAddPothole">Add a New Pothole!</button>
+      <button class="click" @click="goToAddPothole">ADD POTHOLE!</button>
       <!-- <button class="click" >Delete an existing Pothole!</button> -->
-      <button class="click" @click="goToAllPotholeView">See all Potholes!</button>
+      <button class="click" @click="goToAllPotholeView">SEE POTHOLES!</button>
     </div>
     <div class="container">
       <h1 class="home-title">Pothole Patrol</h1>
@@ -66,7 +66,7 @@ export default {
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url('https://images.unsplash.com/photo-1539651044670-315229da9d2f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/03/philadelphia-coronavirus-shutdown-photos.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -74,18 +74,20 @@ export default {
   color: white;
   border: 1px solid black;
   color: rgb(208, 243, 8);
-  font-size: 2rem;
+  font-size: 2.75rem;
 
 }
 
+
+
 .container {
   border-radius: 1px solid white;
-  height: 850px;
+  height: 650px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  background: rgba(122, 118, 118, 0.5);
+  background: rgba(37, 37, 37, 0.5);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
@@ -98,10 +100,10 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
-  height: 40px;
+  justify-content:space-between;
+  height: 55px;
   width: 1000px;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
   text-align: center;
   border-top: 20px;
   margin-bottom: -30px;
@@ -120,9 +122,9 @@ export default {
   box-shadow: 2px 2px 2px black;
   text-align: center;
   font-family: monospace;
-  font-size: large;
-  background-color: rgb(13, 173, 173);
-  color: whitesmoke;
+  font-size: xx-large ;
+  background-color: #dae906;
+  color: black;
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
@@ -153,9 +155,9 @@ export default {
   text-align: center;
   padding-right: 6px;
   padding-left: 6px;
-  font-family: monospace;
-  font-size: 2.4rem;
-  color: black;
+  font-family: monospace, Arial Narrow Impact, Haettenschweiler, 'Arial Narrow Bold';
+  font-size: 2.0rem;
+  color: whitesmoke;
   margin: auto;
   padding-bottom: 150px;
 }
