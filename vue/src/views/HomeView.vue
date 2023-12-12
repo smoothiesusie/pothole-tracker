@@ -1,54 +1,56 @@
 <template>
   <div class="home">
-    <div class="buttons">
+    <div class="button-container">
       <button class="click" @click="goToAddPothole">ADD POTHOLE!</button>
-      <!-- <button class="click" >Delete an existing Pothole!</button> -->
       <button class="click" @click="goToAllPotholeView">SEE POTHOLES!</button>
     </div>
-    <div class="container">
+
+    <div class="content-container">
       <h1 class="home-title">Pothole Patrol</h1>
-     
-      <p class="paragraph">
-        At the heart of our mission with the Pothole Tracker application is a simple yet profound vision: to make our
-        streets safer and our communities more connected. By empowering individuals to report potholes swiftly and
-        efficiently, we're not just fixing roads — we're fostering a sense of community responsibility and collaboration.
+      <div class="paragraph-container">
+        <p class="paragraph">
+          At the heart of our mission with the Pothole Tracker application is a
+          simple yet profound vision: to make our streets safer and our
+          communities more connected. By empowering individuals to report
+          potholes swiftly and efficiently, we're not just fixing roads — we're
+          fostering a sense of community responsibility and collaboration.
         </p>
         <p class="paragraph">
-
-        Each reported pothole symbolizes a step towards smoother, safer journeys for everyone. It's more than just an app;
-        it's a tool for change, demonstrating how technology can bring us together to improve our shared spaces. 
-      </p>
-      <p class="paragraph">
-        Together,
-        we're not just repairing the roads — we're building the foundation for a more responsive and caring world, one
-        application at a time.
-      </p>
+          Each reported pothole symbolizes a step towards smoother, safer
+          journeys for everyone. It's more than just an app; it's a tool for
+          change, demonstrating how technology can bring us together to improve
+          our shared spaces.
+        </p>
+        <p class="paragraph">
+          Together, we're not just repairing the roads — we're building the
+          foundation for a more responsive and caring world, one application at
+          a time.
+        </p>
+      </div>
     </div>
+
     <img src="../img/Pothole Patrol App.jpg" class="app-icon" />
   </div>
 </template>
 
 <script>
-import PotholeService from '../services/PotholeService';
+import PotholeService from "../services/PotholeService";
 
 export default {
-
   methods: {
     goToAddPothole() {
-      this.$router.push('/potholes')
+      this.$router.push("/potholes");
     },
 
     goToAllPotholeView() {
-      this.$router.push('/potholeList')
+      this.$router.push("/potholeList");
     },
     fetchPotholes() {
-      console.log('Fetching potholes...');
+      console.log("Fetching potholes...");
 
-      PotholeService.getPotholeList().then(response => {
-        this.$store.state.potholes = response.data
-
-      })
-
+      PotholeService.getPotholeList().then((response) => {
+        this.$store.state.potholes = response.data;
+      });
     },
     // createMarkers(){
     //   this.$store.state.potholes.forEach(pothole=>{
@@ -56,14 +58,11 @@ export default {
     //       this.$store.state.markers.push(marker)
     //     })
     // },
-   
-  
   },
-  created(){
-      this.fetchPotholes();
-      // this.createMarkers()
-    }
-
+  created() {
+    this.fetchPotholes();
+    // this.createMarkers()
+  },
 };
 </script>
 
@@ -83,10 +82,7 @@ export default {
   border: 1px solid black;
   color: rgb(208, 243, 8);
   font-size: 2.75rem;
-
 }
-
-
 
 .container {
   border-radius: 1px solid white;
@@ -104,63 +100,30 @@ export default {
   width: 1100px;
 }
 
-.buttons {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content:space-around;
-  height: 55px;
-  width: 1000px;
-  padding-top: 40px;
-  padding-bottom: 75px;
-  text-align: center;
-  border-top: 20px;
-  margin-bottom: -30px;
-
-
-}
-
-.click {
-  display: flex;
-  justify-content: center;
-  padding-right: 10px;
-  align-items: center;
-  width: 300px;
-  height: 45px;
-  border-radius: 15px 15px 15px 15px;
-  box-shadow: 2px 2px 2px black;
-  text-align: center;
-  font-family: monospace;
-  font-size: xx-large ;
-  background-color: #dae906;
-  color: black;
-  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-}
-
 .click:hover {
   background-color: aqua;
   transform: scaleY(1.2);
 }
 
-.home-title  {
-  padding-top: 140px;
-  font-size: 2em;
-  color: #dae906;
-  text-align: center;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-family: fantasy;
-  margin-bottom: 20px;
-  margin-top: -100px;
-  display: flex;
+.click {
+  display: inline-flex;
   justify-content: center;
-  /* text-decoration: underline; */
-
+  align-items: center;
+  width: 300px;
+  height: 45px;
+  padding: 0 15px;
+  margin: 0 10px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 2px black;
+  font-size: xx-large;
+  background-color: #dae906;
+  color: black;
+  transition: background-color 0.3s, transform 0.3s;
+  border: none;
+  cursor: pointer;
 }
 
 .paragraph {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   padding-right: 6px;
   padding-left: 6px;
@@ -171,14 +134,57 @@ export default {
   padding-bottom: 40px;
 }
 
+
 .app-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  height: 50px;  /* or the size you prefer */
-  width: 50px;   /* or the size you prefer */
-  z-index: 1000; /* ensures the icon stays above other elements */
+  height: 50px;
+  width: 50px;
+  z-index: 1000;
 }
 
-</style>
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
 
+.home-title  {
+  font-size: 2em;
+  color: #dae906;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: fantasy;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.paragraph-container {
+  background: rgba(34, 2, 2, 0.247);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  max-width: 60%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+
+</style>
