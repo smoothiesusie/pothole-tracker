@@ -8,7 +8,7 @@
     </div>
     <div class="searchPothole">
       <button  @click="displayUserPotholes" class="update">
-        {{ showingUserPotholes ? 'View All Reported Potholes' : 'View Your Reported Potholes'}} 
+        {{ showingUserPotholes ? 'MY REPORTED POTHOLES' : 'MY REPORTED POTHOLES'}} 
       </button>
   
     </div>
@@ -248,17 +248,17 @@ export default {
 
 .update {
   border: 1px solid black;
-  height: 30px;
+  height: 40px;
   border-radius: 5px 5px 5px 5px;
-  background-color: rgb(109, 201, 201);
-  font-family: fantasy;
-  font-size: large;
+  background-color:  #dae906;
+  font-family: monospace;
+  font-size: xx-large;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .update:hover {
-  background-color: rgb(109, 201, 201);
+  background-color:aqua;
   transform: scaleY(1.2);
   border: 2px solid white;
 }
@@ -309,10 +309,10 @@ export default {
   display: flex;
   justify-content: center;
   font-family: fantasy;
-  font-size: 4rem;
+  font-size: 4.5rem;
   margin-bottom: 20px;
-  color: rgb(208, 243, 8);
-  text-decoration: underline;
+  color:  #dae906;
+  /* text-decoration: underline; */
 }
 
 .loading {
@@ -324,7 +324,7 @@ export default {
 }
 
 .top-text {
-  color: rgb(208, 243, 8);
+  color:  white;
   display: flex;
   justify-content: space-between;
   font-size: 2rem;
