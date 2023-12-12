@@ -48,17 +48,20 @@
 }
 
 .nav-welcome p {
+  display:flex;
   margin: 0; 
   /* text-shadow: 2px 2px 3px rgb(214, 214, 195);  */
   color:white;
   font-size: xx-large;
-  padding-left: 600px;
-  align-items: center;
-  
-  
-  
+  /* padding-left: 600px; */
+  padding-left: 10px
+  /* align-items: center; */
+  /* justify-content: space-between; */
+}
 
-  
+.nav-welcome {
+  display: flex;
+  justify-content: space-around;
 }
 
 .nav-links {
