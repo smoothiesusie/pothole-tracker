@@ -171,7 +171,7 @@ label {
 
 
 .form-input-group input:focus {
-  border-color:aqua); 
+  border-color:aqua; 
   box-shadow: 2px 2px 2px rgba(76, 175, 80, 0.4); 
   outline: none; 
 }
