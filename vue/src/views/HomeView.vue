@@ -24,6 +24,7 @@
         application at a time.
       </p>
     </div>
+    <img src="../img/Pothole Patrol App.jpg" class="app-icon" />
   </div>
 </template>
 
@@ -168,6 +169,15 @@ export default {
   color: whitesmoke;
   margin: auto;
   padding-bottom: 40px;
+}
+
+.app-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  height: 50px;  /* or the size you prefer */
+  width: 50px;   /* or the size you prefer */
+  z-index: 1000; /* ensures the icon stays above other elements */
 }
 
 </style>

@@ -28,7 +28,7 @@
       <p><router-link class="GuestView" to="/guestView">View Potholes as Guest</router-link></p>
     </div>
     </form>
-  
+    <img src="../img/Pothole Patrol App.jpg" class="app-icon" />
   </div>
 
 </template>
