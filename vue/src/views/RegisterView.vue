@@ -165,7 +165,7 @@ label {
   font-family:fantasy; 
   margin-bottom: 20px; 
   margin-top: -100px;
-  text-decoration: underline; 
+  /* text-decoration: underline;  */
 }
 
 

@@ -51,7 +51,7 @@
   display:flex;
   margin: 0; 
   /* text-shadow: 2px 2px 3px rgb(214, 214, 195);  */
-  color:white;
+  color:rgb(253, 228, 6);
   font-size: xx-large;
   /* padding-left: 600px; */
   padding-left: 10px
