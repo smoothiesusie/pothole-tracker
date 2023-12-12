@@ -3,7 +3,7 @@
   <div class="full-page-wrapper">
     <!-- <h1 class="title">Pothole Patrol</h1> -->
     <div class="add-pothole">
-      <h2>Add a New Pothole</h2>
+      <h2>ADD POTHOLE</h2>
       <button class="generate-location" @click="getUserLocation">Auto-generate location</button>
       <form @submit.prevent="submitPothole">
         <div>
@@ -203,6 +203,7 @@
   top: 7px;
   color: #dae906;
   font-size: medium;
+  
 }
 input {
   padding: 10px; 
@@ -237,8 +238,9 @@ input {
   width: 100px;
   height: 30px;
   border-radius: 5px 5px 5px 5px;
-  background-color: rgb(109, 201, 201);
+  background-color: aqua;
   transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  cursor: pointer;
 
 }
 
