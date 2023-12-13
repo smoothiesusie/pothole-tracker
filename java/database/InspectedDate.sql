@@ -5,3 +5,6 @@ CREATE TABLE Inspections (
     potholeID INT,
     FOREIGN KEY (potholeID) REFERENCES Potholes(PotholeID)
 );
+
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO final_capstone_appuser;

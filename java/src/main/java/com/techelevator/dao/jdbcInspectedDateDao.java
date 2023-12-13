@@ -11,6 +11,7 @@ import java.util.Date;
 
 @Component
 public class jdbcInspectedDateDao implements inspectedDate {
+    private Pothole pothole;
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -20,24 +21,25 @@ public class jdbcInspectedDateDao implements inspectedDate {
     }
 
     @Override
-    public inspectedDateDto addNewInspectedDate(Date dateInspected) {
+    public inspectedDateDto addNewInspectedDate(Date dateInspected, int inspectedFK) {
         String insertIntoInspections = "INSERT INTO public.inspections(\n" +
-                "\tdateinspected)\n" +
-                "\tVALUES (?);";
-        jdbcTemplate.update(insertIntoInspections, dateInspected);
-
+                "\tdateinspected, inspectedFk )\n" +
+                "\tVALUES (CURRENT_TIMESTAMP, ?);";
         inspectedDateDto newInspection = new inspectedDateDto();
         newInspection.setInspectedDate(dateInspected);
-//        newInspection.setPotholeIdFK(inspectedFK);
+        newInspection.setInspectedFk(inspectedFK);
+
+        jdbcTemplate.update(insertIntoInspections, newInspection.getInspectedFk()); // Use inspectedFK as an argument
 
         return newInspection;
     }
+
 
     private inspectedDateDto mapRowToInspectedDateDto(SqlRowSet rowSet) {
         inspectedDateDto inspectedDateDto = new inspectedDateDto();
 
         inspectedDateDto.setInspectedDate(rowSet.getDate("dateinspected"));
-//        inspectedDateDto.setPotholeIdFK(rowSet.getInt("inspectedFK"));
+        inspectedDateDto.setInspectedFk(rowSet.getInt("inspectedFk"));
 
         return inspectedDateDto;
     }

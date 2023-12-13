@@ -6,15 +6,15 @@ public class inspectedDateDto {
    private  Date inspectedDate;
     private int inspectedDatePK;
 
-    private int potholeIdFK;
+    private int inspectedFk;
 
     public inspectedDateDto() {
     }
 
-    public inspectedDateDto(int inspectedDatePK, int potholeIdFK) {
-
+    public inspectedDateDto(Date inspectedDate, int inspectedDatePK, int inspectedFk) {
+        this.inspectedDate = inspectedDate;
         this.inspectedDatePK = inspectedDatePK;
-        this.potholeIdFK = potholeIdFK;
+        this.inspectedFk = inspectedFk;
     }
 
     public Date getInspectedDate() {
@@ -33,11 +33,11 @@ public class inspectedDateDto {
         this.inspectedDatePK = inspectedDatePK;
     }
 
-    public int getPotholeIdFK() {
-        return potholeIdFK;
+    public int getInspectedFk() {
+        return inspectedFk;
     }
 
-    public void setPotholeIdFK(int potholeIdFK) {
-        this.potholeIdFK = potholeIdFK;
+    public void setInspectedFk(int inspectedFk) {
+        this.inspectedFk = inspectedFk;
     }
 }
