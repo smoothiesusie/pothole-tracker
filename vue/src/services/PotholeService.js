@@ -16,6 +16,10 @@ export default {
 
     deletePothole(id){
         return axios.delete(`/potholes/${id}`)
+    },
+
+    addInspectedDate(date){
+      return axios.post('/addInspectedDate', date)
     }
 
 }
