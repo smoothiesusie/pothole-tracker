@@ -1,7 +1,7 @@
 <template>
   <div class="full-background">
     <div class="top-text">
-      <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
+      <p class="reported-holes">Reported Potholes:{{potholes.length}}</p>
       <h2 class="title">View Potholes</h2>
       <p class="reported-holes">Fixed Potholes: {{ fixedPotholes }}</p>
       
@@ -10,6 +10,8 @@
       <button @click="displayUserPotholes" class="update">
         {{ showingUserPotholes ? 'VIEW ALL REPORTED POTHOLES' : 'VIEW YOUR POTHOLES' }}
       </button>
+      <button @click="addInspectedDate(date)"></button>
+
   
     </div>
     <div class="view-potholes">
@@ -118,6 +120,13 @@ export default {
         // this.$router.go()
         this.$store.commit("INCREMENT_FIXED_POTHOLES");
       });
+    },
+
+    addInspectedDate(date){
+      PotholeService.addInspectedDate(date).then(response => {
+         date = response.data;
+        console.log(date)
+      })
     },
 
     updateStatus(pothole) {
@@ -311,10 +320,13 @@ export default {
   margin-top: -0px;
   display: flex;
   justify-content: center;
+  grid-template-columns: ;
+  
   font-family: fantasy;
   font-size: 4.5rem;
   margin-bottom: 20px;
   color: #dae906;
+  padding-right: 100px
   /* text-decoration: underline; */
   
 }

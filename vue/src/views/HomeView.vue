@@ -162,10 +162,11 @@ export default {
   font-family: fantasy;
   margin-top: 20px;
   margin-bottom: 20px;
+ 
 }
 
 .paragraph-container {
-  background: rgba(34, 2, 2, 0.247);
+  background: rgba(8, 0, 0, 0.719);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -176,6 +177,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border: 1px solid grey;
 }
 
 .content-container {

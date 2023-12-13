@@ -14,8 +14,8 @@ public class InspectionController {
     private inspectedDate inspectedDateDao;
 
     @Autowired
-    public InspectionController(inspectedDate inspectedDateDao){
-
+    public InspectionController(inspectedDate inspectedDateDao, inspectedDateDto inspectionDateDto){
+        this.inspectionDateDto = inspectionDateDto;
         this.inspectedDateDao = inspectedDateDao;
     }
 
@@ -23,7 +23,7 @@ public class InspectionController {
     @RequestMapping(path = "/addInspectedDate", method = RequestMethod.POST)
     public inspectedDateDto addInspectedDate(@RequestBody inspectedDateDto inspection) {
 
-        return inspectedDateDao.addNewInspectedDate(inspection.getInspectedDate(), inspection.getInspectedFk());
+        return inspectedDateDao.addNewInspectedDate(inspection.getInspectedDatePK(),inspection.getDateInspected(), inspection.getInspectedFk());
     }
 
 

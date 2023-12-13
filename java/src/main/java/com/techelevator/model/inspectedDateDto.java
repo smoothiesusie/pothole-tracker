@@ -1,28 +1,35 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
+@Component
 public class inspectedDateDto {
-   private  Date inspectedDate;
+   private  Date dateInspected;
     private int inspectedDatePK;
+
 
     private int inspectedFk;
 
     public inspectedDateDto() {
     }
 
-    public inspectedDateDto(Date inspectedDate, int inspectedDatePK, int inspectedFk) {
-        this.inspectedDate = inspectedDate;
+
+    public inspectedDateDto(int inspectedDatePK, Date dateInspected, int inspectedFk) {
+        this.dateInspected = dateInspected;
         this.inspectedDatePK = inspectedDatePK;
         this.inspectedFk = inspectedFk;
     }
 
-    public Date getInspectedDate() {
-        return inspectedDate;
+    public Date getDateInspected() {
+        return dateInspected;
     }
 
-    public void setInspectedDate(Date inspectedDate) {
-        this.inspectedDate = inspectedDate;
+    public void setDateInspected(Date inspectedDate) {
+        this.dateInspected = inspectedDate;
     }
 
     public int getInspectedDatePK() {
@@ -41,3 +48,5 @@ public class inspectedDateDto {
         this.inspectedFk = inspectedFk;
     }
 }
+
+

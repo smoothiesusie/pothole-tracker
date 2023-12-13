@@ -6,5 +6,5 @@ import java.util.Date;
 
 public interface inspectedDate {
 
-     inspectedDateDto addNewInspectedDate(Date dateInspected, int inspectedFK);
+     inspectedDateDto addNewInspectedDate(int inspectedDatePK, Date dateInspected, int inspectedFK);
 }

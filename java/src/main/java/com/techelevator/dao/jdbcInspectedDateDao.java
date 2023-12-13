@@ -21,12 +21,13 @@ public class jdbcInspectedDateDao implements inspectedDate {
     }
 
     @Override
-    public inspectedDateDto addNewInspectedDate(Date dateInspected, int inspectedFK) {
+    public inspectedDateDto addNewInspectedDate(int inspectedDatePK, Date dateInspected, int inspectedFK) {
         String insertIntoInspections = "INSERT INTO public.inspections(\n" +
                 "\tdateinspected, inspectedFk )\n" +
                 "\tVALUES (CURRENT_TIMESTAMP, ?);";
         inspectedDateDto newInspection = new inspectedDateDto();
-        newInspection.setInspectedDate(dateInspected);
+        newInspection.setInspectedDatePK(inspectedDatePK);
+        newInspection.setDateInspected(dateInspected);
         newInspection.setInspectedFk(inspectedFK);
 
         jdbcTemplate.update(insertIntoInspections, newInspection.getInspectedFk()); // Use inspectedFK as an argument
@@ -38,7 +39,7 @@ public class jdbcInspectedDateDao implements inspectedDate {
     private inspectedDateDto mapRowToInspectedDateDto(SqlRowSet rowSet) {
         inspectedDateDto inspectedDateDto = new inspectedDateDto();
 
-        inspectedDateDto.setInspectedDate(rowSet.getDate("dateinspected"));
+        inspectedDateDto.setDateInspected(rowSet.getDate("dateinspected"));
         inspectedDateDto.setInspectedFk(rowSet.getInt("inspectedFk"));
 
         return inspectedDateDto;
