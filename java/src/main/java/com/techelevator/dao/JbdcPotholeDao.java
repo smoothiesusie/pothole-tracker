@@ -44,11 +44,17 @@ public class JbdcPotholeDao implements PotholeDao {
         List<Pothole> potholes = new ArrayList<>();
 
         String sql = "SELECT potholeid, userid, latitude, longitude, severity, status, reportedat FROM potholes";
+        String testSql ="SELECT potholeid, userid, latitude, longitude, severity, status, reportedat, inspected FROM \n" +
+                " (SELECT MAX(dateinspected) as inspected, inspectedFk FROM inspections GROUP BY inspectedFk) as inspectedInfo\n" +
+                "\t\t\t\tJOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid ";
+
 
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+//            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+                        SqlRowSet results = jdbcTemplate.queryForRowSet(testSql);
+
             while(results.next()){
-                Pothole pothole = mapRowToPotholes(results);
+                Pothole pothole = mapRowToPotholesWithInspectedDate(results);
                 potholes.add(pothole);
             }
         }catch(CannotGetJdbcConnectionException e){
@@ -98,6 +104,21 @@ public class JbdcPotholeDao implements PotholeDao {
         pothole.setSeverity(rowSet.getInt("severity"));
         pothole.setStatus(rowSet.getString("status"));
         pothole.setReportedAt(rowSet.getDate("reportedat"));
+
+        return pothole;
+    }
+
+    private Pothole mapRowToPotholesWithInspectedDate(SqlRowSet rowSet) {
+        Pothole pothole = new Pothole();
+
+        pothole.setPotholeId(rowSet.getInt("potholeid"));
+        pothole.setUserId(rowSet.getInt("userid"));
+        pothole.setLatitude(rowSet.getDouble("latitude"));
+        pothole.setLongitude(rowSet.getDouble("longitude"));
+        pothole.setSeverity(rowSet.getInt("severity"));
+        pothole.setStatus(rowSet.getString("status"));
+        pothole.setReportedAt(rowSet.getDate("reportedat"));
+        pothole.setInspectedDate(rowSet.getDate("inspected"));
 
         return pothole;
     }

@@ -1,18 +1,18 @@
 <template>
   <div class="full-background">
     <div class="top-text">
-      <p class="reported-holes">Reported Potholes:{{potholes.length}}</p>
+      <p class="reported-holes">Reported Potholes:{{ potholes.length }}</p>
       <h2 class="title">View Potholes</h2>
       <p class="reported-holes">Fixed Potholes: {{ fixedPotholes }}</p>
-      
+
     </div>
     <div class="searchPothole">
       <button @click="displayUserPotholes" class="update">
         {{ showingUserPotholes ? 'VIEW ALL REPORTED POTHOLES' : 'VIEW YOUR POTHOLES' }}
       </button>
-      <button @click="addInspectedDate(date)"></button>
+      <!-- <button @click="addInspectedDate(date)"></button> -->
 
-  
+
     </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">Loading potholes...</div>
@@ -41,15 +41,15 @@
             </select>
             <!-- <div v-else>Status: {{ pothole.status }}</div> -->
             <label for="inspected">Inspected Date:
-              {{ pothole.inspectedDate || "Not Inspected Yet" }}</label>
-            <input name="inspected" type="date" v-model="pothole.inspectedDate" v-if="pothole.isClicked" />
+              {{ pothole.inspectedDate }}</label>
+            <input name="inspected" type="date" v-model="inspectedDate" v-if="pothole.isClicked" />
             <div v-else>Status: {{ pothole.status }}</div>
             <div>Date Reported: {{ pothole.reportedAt }}</div>
             <div>Reported By: {{ pothole.username }}</div>
             <button class="update" v-if="isUserAdmin && !pothole.isClicked" v-on:click="updateClicked(pothole)">
               Update Status
             </button>
-            <button class="update" v-if="isUserAdmin && pothole.isClicked" v-on:click="updateStatus(pothole)">
+            <button class="update" v-if="isUserAdmin && pothole.isClicked" v-on:click.prevent="updateStatus(pothole)">
               Submit
             </button>
 
@@ -87,6 +87,8 @@ export default {
       currentUserPotholes: [],
       showingUserPotholes: false,
       // fixedPotholes: 0
+      // date: {dateInspected: "", inspectedFk: 0}
+      inspectedDate: "not inspected yet"
     };
   },
 
@@ -108,6 +110,8 @@ export default {
 
       PotholeService.getPotholeList().then((response) => {
         this.potholes = response.data;
+        console.log(this.potholes)
+
         this.$store.state.potholes = response.data;
         this.isLoading = false;
       });
@@ -122,23 +126,32 @@ export default {
       });
     },
 
-    addInspectedDate(date){
+    addInspectedDate(pothole) {
+      let date = { dateInspected: this.inspectedDate, inspectedFk: pothole.potholeid }
+      let database = ""
       PotholeService.addInspectedDate(date).then(response => {
-         date = response.data;
-        console.log(date)
+        console.log(response.data.dateInspected.substring(0, 10))
+         pothole.inspectedDate = response.data.dateInspected.substring(0, 10)
+        this.$router.push('/')
       })
     },
 
     updateStatus(pothole) {
+      // let date = this.addInspectedDate(pothole)
+      console.log("Returned date", this.inspectedDate)
       PotholeService.updateUsersReport(pothole).then((response) => {
         pothole = response.data;
         pothole.isClicked = false;
-        console.log(pothole);
+        // console.log("This is the date", this.inspectedDate) 
+        // pothole.inspectedDate = this.inspectedDate;
+        // console.log("This is inspected", pothole.inspectedDate)
+        // console.log(pothole);
         alert("pothole has been updated")
         // this.$router.go();
-        this.$router.push('/')
-        
+        // this.$router.push('/')
       });
+      this.addInspectedDate(pothole);
+
     },
     updateClicked(pothole) {
       if (!this.oneClicked) {
@@ -159,42 +172,42 @@ export default {
     displayUserPotholes() {
       this.showingUserPotholes = !this.showingUserPotholes
 
-    if (this.potholes && this.potholes.length > 0 && this.showingUserPotholes) {
-      const filteredPotholes = this.potholes.filter(pothole => {
+      if (this.potholes && this.potholes.length > 0 && this.showingUserPotholes) {
+        const filteredPotholes = this.potholes.filter(pothole => {
 
-        return pothole.username === this.$store.state.user.username;
-      });
+          return pothole.username === this.$store.state.user.username;
+        });
 
-      console.log("Filtered Potholes:", JSON.parse(JSON.stringify(this.potholes)));
+        console.log("Filtered Potholes:", JSON.parse(JSON.stringify(this.potholes)));
 
-      if (filteredPotholes.length > 0) {
-        this.potholes = filteredPotholes;
+        if (filteredPotholes.length > 0) {
+          this.potholes = filteredPotholes;
+        } else {
+          console.log("No potholes found for current user.");
+
+        }
       } else {
-        console.log("No potholes found for current user.");
-        
+        console.log("Potholes array not loaded or empty.");
+        this.potholes = this.$store.state.potholes
       }
-    } else {
-      console.log("Potholes array not loaded or empty.");
-      this.potholes = this.$store.state.potholes
-    }
 
-//     this.showingUserPotholes = !this.showingUserPotholes; // Toggle the state
+      //     this.showingUserPotholes = !this.showingUserPotholes; // Toggle the state
 
-// if (this.showingUserPotholes) {
-//   // Filter and display only current user's potholes
-//   const currentUserUsername = this.$store.state.user.username;
-//   this.potholes = this.originalPotholes.filter(pothole => 
-//     pothole.username === currentUserUsername
-//   );
-// } else {
-//   // Display all potholes
-//   this.potholes = [...this.originalPotholes];
+      // if (this.showingUserPotholes) {
+      //   // Filter and display only current user's potholes
+      //   const currentUserUsername = this.$store.state.user.username;
+      //   this.potholes = this.originalPotholes.filter(pothole => 
+      //     pothole.username === currentUserUsername
+      //   );
+      // } else {
+      //   // Display all potholes
+      //   this.potholes = [...this.originalPotholes];
 
-// }
+      // }
 
 
 
-  },
+    },
   },
   computed: {
     isUserAdmin() {
@@ -321,14 +334,14 @@ export default {
   display: flex;
   justify-content: center;
   grid-template-columns: ;
-  
+
   font-family: fantasy;
   font-size: 4.5rem;
   margin-bottom: 20px;
   color: #dae906;
   padding-right: 100px
-  /* text-decoration: underline; */
-  
+    /* text-decoration: underline; */
+
 }
 
 .loading {
@@ -340,14 +353,14 @@ export default {
 }
 
 .top-text {
-    color: white;
+  color: white;
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
   font-size: 2rem;
   font-family: monospace;
   border-bottom: 2px solid white;
   padding: 5px;
-    background-color: black;
+  background-color: black;
 }
 
 .highlighted {

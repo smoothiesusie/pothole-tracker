@@ -49,12 +49,17 @@ public class JdbcUsersPothole implements UsersPotholeDao{
         String sql = "SELECT potholes.potholeid, users.username, potholes.userid, potholes.latitude, potholes.longitude, potholes.severity, potholes.status, potholes.reportedat \n" +
                 "FROM potholes \n" +
                 "JOIN users ON users.user_id = potholes.userid;\n";
+        String testSql = "SELECT potholeid, userid, username, latitude, longitude, severity, status, reportedat, inspected FROM \n" +
+                " (SELECT MAX(dateinspected) as inspected, inspectedFk FROM inspections GROUP BY inspectedFk) as inspectedInfo\n" +
+                "\t\t\t\tJOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid " +
+        "JOIN users ON users.user_id = potholes.userid;\n";
+
 //            "JOIN users ON users.user_id = potholes.userid ";
 
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(testSql);
             while(results.next()){
-                UsersPotholeDto pothole = mapRowToUsersPothole(results);
+                UsersPotholeDto pothole = mapRowToUsersPotholeInspectedDate(results);
                 potholes.add(pothole);
             }
         }catch(CannotGetJdbcConnectionException e){
@@ -82,6 +87,20 @@ public class JdbcUsersPothole implements UsersPotholeDao{
         usersPothole.setSeverity(rowset.getInt("severity"));
         usersPothole.setStatus(rowset.getString("status"));
         usersPothole.setReportedAt(rowset.getDate("reportedat"));
+        return usersPothole;
+    }
+
+    private UsersPotholeDto mapRowToUsersPotholeInspectedDate(SqlRowSet rowset) {
+        UsersPotholeDto usersPothole = new UsersPotholeDto();
+
+        usersPothole.setPotholeid(rowset.getInt("potholeid"));
+        usersPothole.setUsername(rowset.getString("username"));
+        usersPothole.setLatitude(rowset.getDouble("latitude"));
+        usersPothole.setLongitude(rowset.getDouble("longitude"));
+        usersPothole.setSeverity(rowset.getInt("severity"));
+        usersPothole.setStatus(rowset.getString("status"));
+        usersPothole.setReportedAt(rowset.getDate("reportedat"));
+        usersPothole.setInspectedDate(rowset.getDate("inspected"));
         return usersPothole;
     }
 

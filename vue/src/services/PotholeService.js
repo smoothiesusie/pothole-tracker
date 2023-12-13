@@ -19,7 +19,7 @@ export default {
     },
 
     addInspectedDate(date){
-      return axios.post(`/addInspectedDate/${date.potholeid}`, date)
+      return axios.post('/addInspectedDate', date)
     }
 
 }

@@ -22,6 +22,15 @@ public class Pothole {
 
     private Date reportedAt;
 
+    public Date getInspectedDate() {
+        return inspectedDate;
+    }
+
+    public void setInspectedDate(Date inspectedDate) {
+        this.inspectedDate = inspectedDate;
+    }
+
+    private Date inspectedDate;
     public Pothole(int potholeId, int userId, double latitude, double longitude, int severity, String status, Date reportedAt) {
         this.potholeId = potholeId;
         this.userId = userId;

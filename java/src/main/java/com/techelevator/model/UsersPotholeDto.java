@@ -14,6 +14,15 @@ public class UsersPotholeDto {
     private String status;
     private Date reportedAt;
 
+    public Date getInspectedDate() {
+        return inspectedDate;
+    }
+
+    public void setInspectedDate(Date inspectedDate) {
+        this.inspectedDate = inspectedDate;
+    }
+
+    private Date inspectedDate;
     public UsersPotholeDto(int potholeid, String username, int userid, double latitude, double longitude, int severity, String status, Date reportedAt) {
         this.potholeid = potholeid;
         this.username = username;
