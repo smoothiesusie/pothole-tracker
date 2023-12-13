@@ -20,7 +20,7 @@
         <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
       </div>
       <button type="submit" id="submit">Create Account</button>
-      <p><router-link v-bind:to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      <p><router-link v-bind:to="{ name: 'login' }" style="color: white">Already have an account? Log in.</router-link></p>
     </div>
     </form>
   </div>
