@@ -4,13 +4,13 @@
       <p class="reported-holes">Reported Potholes : {{ potholes.length }}</p>
       <h2 class="title">View Potholes</h2>
       <p class="reported-holes">Fixed Potholes: {{ fixedPotholes }}</p>
-
+      
     </div>
     <div class="searchPothole">
       <button @click="displayUserPotholes" class="update">
-        {{ showingUserPotholes ? 'MY REPORTED POTHOLES' : 'MY REPORTED POTHOLES' }}
+        {{ showingUserPotholes ? 'VIEW ALL REPORTED POTHOLES' : 'VIEW YOUR POTHOLES' }}
       </button>
-
+  
     </div>
     <div class="view-potholes">
       <div v-if="isLoading" class="loading">Loading potholes...</div>
@@ -128,7 +128,7 @@ export default {
         alert("pothole has been updated")
         // this.$router.go();
         this.$router.push('/')
-
+        
       });
     },
     updateClicked(pothole) {
@@ -150,42 +150,42 @@ export default {
     displayUserPotholes() {
       this.showingUserPotholes = !this.showingUserPotholes
 
-      if (this.potholes && this.potholes.length > 0 && this.showingUserPotholes) {
-        const filteredPotholes = this.potholes.filter(pothole => {
+    if (this.potholes && this.potholes.length > 0 && this.showingUserPotholes) {
+      const filteredPotholes = this.potholes.filter(pothole => {
 
-          return pothole.username === this.$store.state.user.username;
-        });
+        return pothole.username === this.$store.state.user.username;
+      });
 
-        console.log("Filtered Potholes:", JSON.parse(JSON.stringify(this.potholes)));
+      console.log("Filtered Potholes:", JSON.parse(JSON.stringify(this.potholes)));
 
-        if (filteredPotholes.length > 0) {
-          this.potholes = filteredPotholes;
-        } else {
-          console.log("No potholes found for current user.");
-
-        }
+      if (filteredPotholes.length > 0) {
+        this.potholes = filteredPotholes;
       } else {
-        console.log("Potholes array not loaded or empty.");
-        this.potholes = this.$store.state.potholes
+        console.log("No potholes found for current user.");
+        
       }
+    } else {
+      console.log("Potholes array not loaded or empty.");
+      this.potholes = this.$store.state.potholes
+    }
 
-      //     this.showingUserPotholes = !this.showingUserPotholes; // Toggle the state
+//     this.showingUserPotholes = !this.showingUserPotholes; // Toggle the state
 
-      // if (this.showingUserPotholes) {
-      //   // Filter and display only current user's potholes
-      //   const currentUserUsername = this.$store.state.user.username;
-      //   this.potholes = this.originalPotholes.filter(pothole => 
-      //     pothole.username === currentUserUsername
-      //   );
-      // } else {
-      //   // Display all potholes
-      //   this.potholes = [...this.originalPotholes];
+// if (this.showingUserPotholes) {
+//   // Filter and display only current user's potholes
+//   const currentUserUsername = this.$store.state.user.username;
+//   this.potholes = this.originalPotholes.filter(pothole => 
+//     pothole.username === currentUserUsername
+//   );
+// } else {
+//   // Display all potholes
+//   this.potholes = [...this.originalPotholes];
 
-      // }
+// }
 
 
 
-    },
+  },
   },
   computed: {
     isUserAdmin() {
@@ -319,43 +319,43 @@ export default {
   
 }
 
-  .loading {
-    display: flex;
-    justify-content: center;
-    font-size: 6rem;
-    font-family: monospace;
-    color: rgb(160, 216, 216);
-  }
+.loading {
+  display: flex;
+  justify-content: center;
+  font-size: 6rem;
+  font-family: monospace;
+  color: rgb(160, 216, 216);
+}
 
-  .top-text {
+.top-text {
     color: white;
-    display: flex;
+  display: flex;
     justify-content: space-between;
-    font-size: 2rem;
-    font-family: monospace;
-    border-bottom: 2px solid white;
-    padding: 5px;
+  font-size: 2rem;
+  font-family: monospace;
+  border-bottom: 2px solid white;
+  padding: 5px;
     background-color: black;
-  }
+}
 
-  .highlighted {
-    background-color: rgb(13, 173, 173);
-    border-radius: 15px 15px 15px 15px;
-    padding: 5px;
-    border: 2px solid rgb(255, 255, 255);
-    border-left: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
-  }
+.highlighted {
+  background-color: rgb(13, 173, 173);
+  border-radius: 15px 15px 15px 15px;
+  padding: 5px;
+  border: 2px solid rgb(255, 255, 255);
+  border-left: 5px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
 
-  .pothole-list-move {
-    transition: transform 1s ease;
-  }
+.pothole-list-move {
+  transition: transform 1s ease;
+}
 
-  .searchPothole {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 10px 10px 10px 10px;
-  }
+.searchPothole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 10px 10px 10px 10px;
+}
 </style>
