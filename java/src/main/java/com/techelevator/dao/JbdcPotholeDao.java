@@ -46,7 +46,7 @@ public class JbdcPotholeDao implements PotholeDao {
         String sql = "SELECT potholeid, userid, latitude, longitude, severity, status, reportedat FROM potholes";
         String testSql ="SELECT potholeid, userid, latitude, longitude, severity, status, reportedat, inspected FROM \n" +
                 " (SELECT MAX(dateinspected) as inspected, inspectedFk FROM inspections GROUP BY inspectedFk) as inspectedInfo\n" +
-                "\t\t\t\tJOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid ";
+                "\t\t\t\t RIGHT JOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid ";
 
 
         try {

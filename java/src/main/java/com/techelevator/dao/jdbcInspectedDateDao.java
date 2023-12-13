@@ -24,8 +24,8 @@ public class jdbcInspectedDateDao implements inspectedDate {
     public inspectedDateDto addNewInspectedDate(int inspectedDatePK, Date dateInspected, int inspectedFK) {
         String insertIntoInspections = "INSERT INTO public.inspections(\n" +
                 "\tdateinspected, inspectedFk )\n" +
-                "\tVALUES (CURRENT_TIMESTAMP, ?) RETURNING inspecteddate;";
-        inspectedDatePK = jdbcTemplate.queryForObject(insertIntoInspections, int.class, inspectedFK);
+                "\tVALUES (?, ?) RETURNING inspecteddate;";
+        inspectedDatePK = jdbcTemplate.queryForObject(insertIntoInspections, int.class,dateInspected, inspectedFK);
         inspectedDateDto newInspection = new inspectedDateDto();
         newInspection.setInspectedDatePK(inspectedDatePK);
         newInspection.setDateInspected(dateInspected);

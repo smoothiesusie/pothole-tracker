@@ -51,7 +51,7 @@ public class JdbcUsersPothole implements UsersPotholeDao{
                 "JOIN users ON users.user_id = potholes.userid;\n";
         String testSql = "SELECT potholeid, userid, username, latitude, longitude, severity, status, reportedat, inspected FROM \n" +
                 " (SELECT MAX(dateinspected) as inspected, inspectedFk FROM inspections GROUP BY inspectedFk) as inspectedInfo\n" +
-                "\t\t\t\tJOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid " +
+                "\t\t\t\tRIGHT JOIN potholes ON inspectedInfo.inspectedfk = potholes.potholeid " +
         "JOIN users ON users.user_id = potholes.userid;\n";
 
 //            "JOIN users ON users.user_id = potholes.userid ";
